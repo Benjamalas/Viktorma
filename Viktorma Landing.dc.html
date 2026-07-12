@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;family=Barlow+Condensed:wght@500;600;700&amp;family=Barlow+Semi+Condensed:wght@500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page-bg,#f4f1ea);font-family:'Barlow',system-ui,sans-serif}
+  a{color:var(--accent,#c9a227);text-decoration:none}
+  a:hover{opacity:.82}
+</style>
+</helmet>
+
+<div style="{{ rootStyle }}">
+<div style="width:100%;color:var(--ink,#17242e);background:var(--page-bg,#f4f1ea);font-family:'Barlow',sans-serif" data-screen-label="Viktorma">
+
+  <!-- nav -->
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:20px 5vw;background:var(--hero-bg,#0e1a24);border-bottom:1px solid rgba(125,148,163,.16)">
+    <div style="display:flex;align-items:center;gap:11px">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;letter-spacing:.14em;color:var(--hero-fg,#fff)">VIKTORMA</div>
+    </div>
+    <nav style="display:flex;align-items:center;gap:30px">
+      <a href="#paslaugos" style="color:var(--hero-fg,#fff);opacity:.82;font-size:14.5px;font-weight:500">Paslaugos</a>
+      <a href="#kodel" style="color:var(--hero-fg,#fff);opacity:.82;font-size:14.5px;font-weight:500">Kodėl mes</a>
+      <a href="#kontaktai" style="color:var(--hero-fg,#fff);opacity:.82;font-size:14.5px;font-weight:500">Kontaktai</a>
+      <a href="tel:+37069931163" style="background:var(--accent,#c9a227);color:var(--accent-ink,#0e1a24);font-weight:600;font-size:14px;padding:9px 18px;border-radius:var(--btn-radius,7px);white-space:nowrap">+370 699 31163</a>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <div style="background:var(--hero-bg,#0e1a24);padding:60px 5vw 68px">
+   <div style="max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center">
+    <div>
+      <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--accent,#c9a227);margin-bottom:20px">MECHANINIŲ PAVARŲ DĖŽIŲ SERVISAS · MARIJAMPOLĖ</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:62px;line-height:1.02;margin:0 0 20px;color:var(--hero-fg,#fff);text-wrap:balance;text-transform:var(--head-tr,none);letter-spacing:var(--head-ls,normal)">Jūsų mechaninė dėžė vėl važiuos kaip nauja</h1>
+      <p style="font-size:18px;line-height:1.55;color:var(--hero-sub,#a9b6bf);margin:0 0 30px;max-width:460px">Diagnostika, kapitalinis remontas ir tepalų keitimas — viską atliekame patys, be tarpininkų. Aiškiai, greitai ir su garantija.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px">
+        <a href="#kontaktai" style="background:var(--accent,#c9a227);color:var(--accent-ink,#0e1a24);font-weight:700;font-size:15.5px;padding:14px 26px;border-radius:var(--btn-radius,7px);white-space:nowrap">Registruotis remontui</a>
+        <a href="tel:+37069931163" style="border:1.5px solid var(--hero-border,rgba(125,148,163,.35));color:var(--hero-fg,#fff);font-weight:600;font-size:15.5px;padding:14px 26px;border-radius:var(--btn-radius,7px);white-space:nowrap">Skambinti servisui</a>
+      </div>
+      <div style="display:flex;gap:26px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:12px;color:var(--hero-sub,#7d94a3)">
+        <span>✓ Garantija darbams</span><span>✓ Originalūs remkomplektai</span>
+      </div>
+    </div>
+    <div style="height:380px;border-radius:var(--radius,10px);background:#f4f2ee;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(125,148,163,.25)"><img src="./chatgpt-image-jul-11-2026-12_46_42-am-mrfk1mcr.png" alt="Mechaninė pavarų dėžė" style="width:100%;height:100%;object-fit:cover"></div>
+   </div>
+  </div>
+
+  <!-- trust strip -->
+  <div style="background:var(--accent,#c9a227);padding:16px 5vw;color:var(--accent-ink,#0e1a24)">
+   <div style="max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:15px">
+    <span>Remontuojame patys — nevežame kitiems</span><span>·</span><span>Dalys pigiau per rrr.lt</span><span>·</span><span>Dirbame I–V 9:00–18:00</span>
+   </div>
+  </div>
+
+  <!-- services -->
+  <div id="paslaugos" style="padding:64px 5vw 24px">
+   <div style="max-width:1160px;margin:0 auto">
+    <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--accent,#c9a227);margin-bottom:10px">MŪSŲ PASLAUGOS</div>
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:40px;margin:0 0 34px;color:var(--ink,#17242e);text-transform:var(--head-tr,none);letter-spacing:var(--head-ls,normal)">Ką galime padaryti jūsų dėžei</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px">
+      <div style="background:var(--card-bg,#fff);border:1px solid var(--card-border,#e2ddd1);border-radius:var(--radius,10px);padding:26px 24px">
+        <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent,#c9a227);margin-bottom:14px">01</div>
+        <h3 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:21px;margin:0 0 9px;color:var(--ink,#17242e);text-transform:var(--head-tr,none)">Kapitalinis remontas</h3>
+        <p style="font-size:14.5px;line-height:1.5;color:var(--muted,#5a6b76);margin:0">Ardome, matuojame ir atstatome pavarų dėžę iki gamyklinių parametrų su kokybiškais remkomplektais.</p>
+      </div>
+      <div style="background:var(--card-bg,#fff);border:1px solid var(--card-border,#e2ddd1);border-radius:var(--radius,10px);padding:26px 24px">
+        <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent,#c9a227);margin-bottom:14px">02</div>
+        <h3 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:21px;margin:0 0 9px;color:var(--ink,#17242e);text-transform:var(--head-tr,none)">Gedimų diagnostika</h3>
+        <p style="font-size:14.5px;line-height:1.5;color:var(--muted,#5a6b76);margin:0">Tiksliai nustatome gedimą prieš remontą, kad žinotumėte, kas ir kiek kainuos.</p>
+      </div>
+      <div style="background:var(--card-bg,#fff);border:1px solid var(--card-border,#e2ddd1);border-radius:var(--radius,10px);padding:26px 24px">
+        <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent,#c9a227);margin-bottom:14px">03</div>
+        <h3 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:21px;margin:0 0 9px;color:var(--ink,#17242e);text-transform:var(--head-tr,none)">Tepalų ir filtrų keitimas</h3>
+        <p style="font-size:14.5px;line-height:1.5;color:var(--muted,#5a6b76);margin:0">Profilaktinis keitimas, kuris žymiai pailgina dėžės tarnavimą ir apsaugo nuo brangaus remonto.</p>
+      </div>
+      <div style="background:var(--card-bg,#fff);border:1px solid var(--card-border,#e2ddd1);border-radius:var(--radius,10px);padding:26px 24px">
+        <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent,#c9a227);margin-bottom:14px">04</div>
+        <h3 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:21px;margin:0 0 9px;color:var(--ink,#17242e);text-transform:var(--head-tr,none)">Mechaninės dėžės montavimas</h3>
+        <p style="font-size:14.5px;line-height:1.5;color:var(--muted,#5a6b76);margin:0">Perdarymas iš automatinės į mechaninę bei sankabos komplekto keitimas.</p>
+      </div>
+      <div style="background:var(--card-bg,#fff);border:1px solid var(--card-border,#e2ddd1);border-radius:var(--radius,10px);padding:26px 24px">
+        <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent,#c9a227);margin-bottom:14px">05</div>
+        <h3 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:21px;margin:0 0 9px;color:var(--ink,#17242e);text-transform:var(--head-tr,none)">Trumpesnės eigos svirtys</h3>
+        <p style="font-size:14.5px;line-height:1.5;color:var(--muted,#5a6b76);margin:0">Short-shifter sistemos ir modifikacijos aiškesniam, tikslesniam pavarų jungimui.</p>
+      </div>
+      <div style="background:var(--contact-bg,#0e1a24);border-radius:var(--radius,10px);padding:26px 24px;display:flex;flex-direction:column;justify-content:center">
+        <p style="font-size:15.5px;line-height:1.5;color:var(--contact-sub,#c9d2d8);margin:0 0 14px">Nežinote, kur bėda? Atveškite automobilį — meistras pravažiuos ir nustatys gedimą.</p>
+        <a href="#kontaktai" style="color:var(--accent,#c9a227);font-weight:700;font-size:15px">Užsakyti diagnostiką →</a>
+      </div>
+    </div>
+   </div>
+  </div>
+
+  <!-- why us -->
+  <div id="kodel" style="padding: 44px 5vw 64px; position: relative">
+   
+  <div style="max-width: 1160px; margin: 0 auto; background: var(--band-bg,#eae4d6); border-radius: var(--radius,12px); padding: 40px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px">
+      <div style="text-align:center"><div style="font-family: 'Barlow Condensed',sans-serif; font-weight: 700; font-size: 38px; color: var(--ink,#0e1a24)">Visos markės</div><div style="font-size: 14px; color: var(--muted,#5a6b76); margin-top: 4px">mechaninės pavarų dėžės</div></div>
+      <div style="text-align:center"><div style="font-family: 'Barlow Condensed',sans-serif; font-weight: 700; font-size: 38px; color: var(--ink,#0e1a24)">Be tarpininkų</div><div style="font-size: 14px; color: var(--muted,#5a6b76); margin-top: 4px">visą darbą atliekame patys</div></div>
+      <div style="text-align:center"><div style="font-family: 'Barlow Condensed',sans-serif; font-weight: 700; font-size: 38px; color: var(--ink,#0e1a24)">Garantija</div><div style="font-size: 14px; color: var(--muted,#5a6b76); margin-top: 4px">suteikiama atliktiems darbams</div></div>
+   </div></div>
+
+  <!-- contact -->
+  <div id="kontaktai" style="background:var(--contact-bg,#0e1a24);padding:60px 5vw">
+   <div style="max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:44px">
+    <div>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:36px;margin:0 0 22px;color:var(--contact-fg,#fff);text-transform:var(--head-tr,none);letter-spacing:var(--head-ls,normal)">Užsukite arba paskambinkite</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px 30px;font-size:15px;color:var(--contact-sub,#c9d2d8);line-height:1.5">
+        <div><div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--contact-label,#7d94a3);margin-bottom:5px">SERVISAS</div>Vasaros g. 44 / 44A<br>LT-68111 Marijampolė</div>
+        <div><div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--contact-label,#7d94a3);margin-bottom:5px">TELEFONAI</div>+370 699 31163<br>+370 608 68400</div>
+        <div><div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--contact-label,#7d94a3);margin-bottom:5px">EL. PAŠTAS</div>viktorma@inbox.lt</div>
+        <div><div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--contact-label,#7d94a3);margin-bottom:5px">DARBO LAIKAS</div>I–V 9:00–18:00<br>Savaitgaliais nedirbame</div>
+      </div>
+    </div>
+    <div style="border-radius:var(--radius,10px);background:repeating-linear-gradient(135deg,var(--ph-a,#16232e),var(--ph-a,#16232e) 13px,var(--ph-b,#1b2b38) 13px,var(--ph-b,#1b2b38) 26px);display:flex;align-items:center;justify-content:center;color:var(--ph-ink,#7d94a3);font-family:'Space Mono',monospace;font-size:13px;border:1px solid rgba(125,148,163,.25);min-height:220px">žemėlapis · Vasaros g. 44</div>
+   </div>
+  </div>
+  <div style="background:var(--foot-bg,#0a141c);padding:18px 5vw;color:var(--foot-ink,#5f7280)">
+   <div style="max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px">
+    <span>© 2026 Viktorma · Marijampolė</span><span>Pigesnės dalys — <a href="https://rrr.lt" style="color:var(--accent,#c9a227)">rrr.lt</a></span>
+   </div>
+  </div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Naktinis&quot;,&quot;Dienos&quot;,&quot;Cechas&quot;],&quot;default&quot;:&quot;Naktinis&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Nuotaika&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#c9a227&quot;,&quot;#b3391f&quot;,&quot;#4ea172&quot;,&quot;#2f6fb0&quot;],&quot;default&quot;:&quot;#c9a227&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Nuotaika&quot;},&quot;character&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Patikimas&quot;,&quot;Grubus&quot;,&quot;Sportinis&quot;],&quot;default&quot;:&quot;Patikimas&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Nuotaika&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props || {};
+    const theme = p.theme || 'Naktinis';
+    const accent = p.accent || '#c9a227';
+    const character = p.character || 'Patikimas';
+
+    const themes = {
+      'Naktinis': {heroBg:'#0e1a24',heroFg:'#ffffff',heroSub:'#a9b6bf',heroBorder:'rgba(125,148,163,.35)',pageBg:'#f4f1ea',ink:'#17242e',muted:'#5a6b76',cardBg:'#ffffff',cardBorder:'#e2ddd1',bandBg:'#eae4d6',contactBg:'#0e1a24',contactFg:'#ffffff',contactSub:'#c9d2d8',contactLabel:'#7d94a3',footBg:'#0a141c',footInk:'#5f7280',phA:'#16232e',phB:'#1b2b38',phInk:'#7d94a3'},
+      'Dienos': {heroBg:'#f4f1ea',heroFg:'#17242e',heroSub:'#5a6b76',heroBorder:'rgba(23,36,46,.25)',pageBg:'#ffffff',ink:'#17242e',muted:'#5a6b76',cardBg:'#f7f4ee',cardBorder:'#e6e0d3',bandBg:'#f0ebe0',contactBg:'#17242e',contactFg:'#ffffff',contactSub:'#c9d2d8',contactLabel:'#8a99a3',footBg:'#111c24',footInk:'#6b7d89',phA:'#e7e2d6',phB:'#efeae0',phInk:'#9a9384'},
+      'Cechas': {heroBg:'#1c1b18',heroFg:'#f2ede3',heroSub:'#b3ab9c',heroBorder:'rgba(210,200,180,.22)',pageBg:'#e7e2d6',ink:'#20201c',muted:'#6a6559',cardBg:'#f2ede3',cardBorder:'#d8d2c4',bandBg:'#dcd6c8',contactBg:'#1c1b18',contactFg:'#f2ede3',contactSub:'#c3bcae',contactLabel:'#8a8375',footBg:'#141310',footInk:'#7a7365',phA:'#26251f',phB:'#2f2e26',phInk:'#8a8375'}
+    };
+    const t = themes[theme] || themes['Naktinis'];
+
+    const lightAccents = ['#c9a227', '#4ea172'];
+    const accentInk = lightAccents.includes(accent) ? '#0e1a24' : '#ffffff';
+
+    const chars = {
+      'Patikimas': {radius:'10px', btn:'7px', tr:'none', ls:'normal'},
+      'Grubus':    {radius:'0px',  btn:'0px', tr:'uppercase', ls:'.03em'},
+      'Sportinis': {radius:'4px',  btn:'40px', tr:'none', ls:'-.015em'}
+    };
+    const c = chars[character] || chars['Patikimas'];
+
+    const rootStyle = [
+      `--accent:${accent}`, `--accent-ink:${accentInk}`,
+      `--hero-bg:${t.heroBg}`, `--hero-fg:${t.heroFg}`, `--hero-sub:${t.heroSub}`, `--hero-border:${t.heroBorder}`,
+      `--page-bg:${t.pageBg}`, `--ink:${t.ink}`, `--muted:${t.muted}`,
+      `--card-bg:${t.cardBg}`, `--card-border:${t.cardBorder}`, `--band-bg:${t.bandBg}`,
+      `--contact-bg:${t.contactBg}`, `--contact-fg:${t.contactFg}`, `--contact-sub:${t.contactSub}`, `--contact-label:${t.contactLabel}`,
+      `--foot-bg:${t.footBg}`, `--foot-ink:${t.footInk}`,
+      `--ph-a:${t.phA}`, `--ph-b:${t.phB}`, `--ph-ink:${t.phInk}`,
+      `--radius:${c.radius}`, `--btn-radius:${c.btn}`, `--head-tr:${c.tr}`, `--head-ls:${c.ls}`
+    ].join(';');
+
+    return { rootStyle };
+  }
+}
+</script>
+</body>
+</html>
