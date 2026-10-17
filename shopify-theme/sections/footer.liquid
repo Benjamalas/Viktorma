@@ -1,0 +1,47 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">VIKTORMA</div>
+        <p class="muted" style="margin-top:10px">Mechaninių pavarų dėžių dalys ir servisas Marijampolėje.</p>
+        <div class="socials">
+          {%- if settings.facebook != blank -%}<a href="{{ settings.facebook }}" aria-label="Facebook" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></a>{%- endif -%}
+          {%- if settings.instagram != blank -%}<a href="{{ settings.instagram }}" aria-label="Instagram" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zM12 2c-2.7 0-3 0-4.1.1C4.4 2.2 2.2 4.4 2.1 7.9 2 9 2 9.3 2 12s0 3 .1 4.1c.1 3.5 2.3 5.7 5.8 5.8 1.1.1 1.4.1 4.1.1s3 0 4.1-.1c3.5-.1 5.7-2.3 5.8-5.8.1-1.1.1-1.4.1-4.1s0-3-.1-4.1c-.1-3.5-2.3-5.7-5.8-5.8C15 2 14.7 2 12 2z"/></svg></a>{%- endif -%}
+        </div>
+      </div>
+      <div>
+        <h4>Kontaktai</h4>
+        <p>{{ settings.address }}</p>
+        <p><a href="tel:{{ settings.phone | remove: ' ' }}">{{ settings.phone }}</a></p>
+        <p><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></p>
+      </div>
+      <div>
+        <h4>Parduotuvė</h4>
+        {%- for link in linklists[section.settings.menu].links -%}<p><a href="{{ link.url }}">{{ link.title }}</a></p>{%- endfor -%}
+        {%- if settings.service_url != blank -%}<p><a href="{{ settings.service_url }}">Remonto paslaugos</a></p>{%- endif -%}
+      </div>
+      <div>
+        <h4>Rekvizitai</h4>
+        <p>{{ settings.company_name | default: shop.name }}</p>
+        {%- if settings.company_code != blank %}<p>Įmonės kodas: {{ settings.company_code }}</p>{% endif -%}
+        {%- if settings.vat_code != blank %}<p>PVM kodas: {{ settings.vat_code }}</p>{% endif -%}
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© {{ 'now' | date: '%Y' }} Viktorma · Visos teisės saugomos</span>
+      <span>
+        {%- if shop.policies.size > 0 -%}{%- for policy in shop.policies -%}<a href="{{ policy.url }}">{{ policy.title }}</a>{% unless forloop.last %} · {% endunless %}{%- endfor -%}{%- endif -%}
+      </span>
+      <span>Svetainę kuria ir prižiūri <a href="https://kilk.pro" target="_blank" rel="noopener">Kilk.pro</a></span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Poraštė",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Parduotuvės nuorodos", "default": "footer" }
+  ]
+}
+{% endschema %}

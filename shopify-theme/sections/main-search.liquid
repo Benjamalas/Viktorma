@@ -1,0 +1,37 @@
+{%- paginate search.results by 24 -%}
+<section class="shop-page">
+  <div class="wrap">
+    <div class="page-head reveal">
+      <p class="eyebrow">Paieška</p>
+      <h1 class="display">{% if search.performed %}„{{ search.terms | escape }}“{% else %}Ieškoti dalių{% endif %}</h1>
+      {%- if search.performed %}<p class="muted count">{{ search.results_count }} rezultatų</p>{% endif -%}
+    </div>
+    {%- unless search.performed -%}
+      <form action="{{ routes.search_url }}" method="get" class="inline-search"><input type="search" name="q" placeholder="Dėžės kodas, markė, modelis…"><button class="btn btn-gold">Ieškoti</button></form>
+    {%- else -%}
+      <div class="toolbar">
+        <button class="btn btn-ghost filter-open" data-toggle="filters">{% render 'icon', name: 'filter' %} Filtrai</button>
+        <select id="sort-select" aria-label="Rikiuoti">
+          {%- assign sort_by = search.sort_by | default: search.default_sort_by -%}
+          {%- for o in search.sort_options -%}<option value="{{ o.value }}"{% if o.value == sort_by %} selected{% endif %}>{{ o.name }}</option>{%- endfor -%}
+        </select>
+      </div>
+      <div class="shop-layout">
+        <aside class="filters-wrap">{% render 'filters', results: search, action: routes.search_url, sort_by: search.sort_by %}</aside>
+        <div>
+          {%- if search.results.size == 0 -%}
+            <p class="empty muted">Nieko nerasta. Pabandykite kitą žodį arba <a href="{{ routes.all_products_collection_url }}">peržiūrėkite visas dalis</a>.</p>
+          {%- else -%}
+            <div class="grid">{%- for item in search.results -%}{%- if item.object_type == 'product' -%}{% render 'product-card', product: item %}{%- endif -%}{%- endfor -%}</div>
+          {%- endif -%}
+          {%- if paginate.pages > 1 %}<div class="pager">{{ paginate | default_pagination }}</div>{% endif -%}
+        </div>
+      </div>
+    {%- endunless -%}
+  </div>
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{ "name": "Paieškos rezultatai" }
+{% endschema %}

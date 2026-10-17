@@ -1,0 +1,53 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero"
+    },
+    "finder": {
+      "type": "vehicle-finder"
+    },
+    "featured": {
+      "type": "featured-collection"
+    },
+    "trust": {
+      "type": "trust-row",
+      "blocks": {
+        "a": {
+          "type": "item",
+          "settings": {
+            "tag": "01",
+            "title": "Patikrintos dalys",
+            "text": "Kiekviena detalė apžiūrėta meistrų, kurie dėžes taiso kasdien."
+          }
+        },
+        "b": {
+          "type": "item",
+          "settings": {
+            "tag": "02",
+            "title": "Konsultacija",
+            "text": "Neaišku, kuri dalis tinka? Paskambinkite, padėsime išsirinkti."
+          }
+        },
+        "c": {
+          "type": "item",
+          "settings": {
+            "tag": "03",
+            "title": "Pristatymas",
+            "text": "Siunčiame visoje Lietuvoje, o Marijampolėje galite atsiimti patys."
+          }
+        }
+      },
+      "block_order": [
+        "a",
+        "b",
+        "c"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "finder",
+    "featured",
+    "trust"
+  ]
+}

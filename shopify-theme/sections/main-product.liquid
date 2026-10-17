@@ -1,0 +1,66 @@
+{%- assign mf = product.metafields.custom -%}
+{%- assign current = product.selected_or_first_available_variant -%}
+<section class="pdp">
+  <div class="wrap pdp-grid">
+    <div class="gallery reveal">
+      {%- for media in product.media -%}
+        {%- if media.media_type == 'image' -%}
+          {%- assign load = 'lazy' -%}{%- if forloop.first %}{% assign load = 'eager' %}{% endif -%}
+          <div class="slide">{{ media | image_url: width: 1000 | image_tag: loading: load, widths: '500, 750, 1000', sizes: '(min-width: 900px) 560px, 100vw', alt: media.alt | default: product.title }}</div>
+        {%- endif -%}
+      {%- else -%}
+        <div class="slide ph">{{ 'product-1' | placeholder_svg_tag }}</div>
+      {%- endfor -%}
+    </div>
+
+    <div class="pdp-info">
+      <p class="eyebrow reveal">{{ mf.manufacturer.value | default: product.vendor }}</p>
+      <h1 class="display reveal" data-delay="1">{{ product.title }}</h1>
+      {%- if mf.part_number != blank %}<p class="code reveal" data-delay="1">Kodas: {{ mf.part_number.value }}</p>{% endif -%}
+
+      {%- form 'product', product, class: 'buy reveal' -%}
+        <div class="buy-price">{% render 'price', product: current %}</div>
+        {%- unless product.has_only_default_variant -%}
+          <label class="field">{{ product.options_with_values.first.name }}
+            <select name="id">
+              {%- for v in product.variants -%}<option value="{{ v.id }}"{% if v == current %} selected{% endif %}{% unless v.available %} disabled{% endunless %}>{{ v.title }} · {{ v.price | money }}</option>{%- endfor -%}
+            </select>
+          </label>
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ current.id }}">
+        {%- endunless -%}
+        <div class="buy-row">
+          <input class="qty" type="number" name="quantity" value="1" min="1" inputmode="numeric" aria-label="Kiekis">
+          <button class="btn btn-gold" type="submit"{% unless current.available %} disabled{% endunless %}>{% if current.available %}Į krepšelį{% else %}Išparduota{% endif %}</button>
+        </div>
+        {{ form | payment_terms }}
+      {%- endform -%}
+
+      <p class="stock muted reveal" data-delay="2">{% if current.available %}Yra sandėlyje{% else %}Šiuo metu nėra. <a href="tel:{{ settings.phone | remove: ' ' }}">Paskambinkite dėl užsakymo</a>{% endif %}</p>
+
+      {%- assign models = mf.models.value | join: ', ' -%}
+      {%- assign years = mf.years.value | join: ', ' -%}
+      <dl class="specs reveal">
+        {%- if mf.manufacturer != blank %}<div><dt>Gamintojas</dt><dd>{{ mf.manufacturer.value }}</dd></div>{% endif -%}
+        {%- if models != blank %}<div><dt>Modeliai</dt><dd>{{ models }}</dd></div>{% endif -%}
+        {%- if years != blank %}<div><dt>Metai</dt><dd>{{ years }}</dd></div>{% endif -%}
+        {%- if mf.gearbox_code != blank %}<div><dt>Dėžės kodas</dt><dd>{{ mf.gearbox_code.value }}</dd></div>{% endif -%}
+        {%- if mf.gearbox_type != blank %}<div><dt>Dėžės tipas</dt><dd>{{ mf.gearbox_type.value }}</dd></div>{% endif -%}
+        {%- if mf.condition != blank %}<div><dt>Būklė</dt><dd>{{ mf.condition.value }}</dd></div>{% endif -%}
+        {%- if current.sku != blank %}<div><dt>SKU</dt><dd>{{ current.sku }}</dd></div>{% endif -%}
+      </dl>
+
+      {%- if product.description != blank -%}<div class="rte reveal">{{ product.description }}</div>{%- endif -%}
+
+      <div class="help reveal">
+        <span class="eyebrow">Nesate tikri, ar tinka?</span>
+        <a class="btn btn-ghost" href="tel:{{ settings.phone | remove: ' ' }}">Skambinti {{ settings.phone }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="application/ld+json">{{ product | structured_data }}</script>
+
+{% schema %}
+{ "name": "Prekė" }
+{% endschema %}
