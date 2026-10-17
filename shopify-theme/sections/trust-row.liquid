@@ -1,0 +1,36 @@
+<section class="block trust">
+  <div class="wrap trust-grid">
+    {%- for b in section.blocks -%}
+      <div class="trust-item reveal" data-delay="{{ forloop.index }}" {{ b.shopify_attributes }}>
+        <span class="eyebrow">{{ b.settings.tag }}</span>
+        <h3>{{ b.settings.title }}</h3>
+        <p class="muted">{{ b.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Privalumai",
+  "blocks": [
+    {
+      "type": "item", "name": "Punktas",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Žyma", "default": "01" },
+        { "type": "text", "id": "title", "label": "Antraštė", "default": "Garantija" },
+        { "type": "textarea", "id": "text", "label": "Tekstas", "default": "Patikrintos dalys su garantija." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{
+    "name": "Privalumai",
+    "blocks": [
+      { "type": "item", "settings": { "tag": "01", "title": "Patikrintos dalys", "text": "Kiekviena detalė apžiūrėta meistrų, kurie dėžes taiso kasdien." } },
+      { "type": "item", "settings": { "tag": "02", "title": "Konsultacija", "text": "Neaišku, kuri dalis tinka? Paskambinkite, padėsime išsirinkti." } },
+      { "type": "item", "settings": { "tag": "03", "title": "Pristatymas", "text": "Siunčiame visoje Lietuvoje, o Marijampolėje galite atsiimti patys." } }
+    ]
+  }]
+}
+{% endschema %}

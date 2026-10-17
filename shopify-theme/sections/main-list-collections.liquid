@@ -1,0 +1,17 @@
+<section class="shop-page">
+  <div class="wrap">
+    <div class="page-head reveal"><p class="eyebrow">Dalys</p><h1 class="display">Kategorijos</h1></div>
+    <div class="grid">
+      {%- for c in collections -%}
+        <a class="card reveal" href="{{ c.url }}">
+          <div class="card-img">{%- if c.image -%}{{ c.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: c.title }}{%- else -%}<div class="ph">{{ 'collection-1' | placeholder_svg_tag }}</div>{%- endif -%}</div>
+          <div class="card-body"><h3>{{ c.title }}</h3><span class="muted">{{ c.products_count }} prekių</span></div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Kategorijų sąrašas" }
+{% endschema %}

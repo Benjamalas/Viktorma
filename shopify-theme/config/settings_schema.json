@@ -1,0 +1,17 @@
+[
+  { "name": "theme_info", "theme_name": "Viktorma Shop", "theme_version": "1.0.0", "theme_author": "Kilk.pro", "theme_documentation_url": "https://github.com/Benjamalas/Viktorma", "theme_support_url": "https://kilk.pro" },
+  {
+    "name": "Įmonės duomenys",
+    "settings": [
+      { "type": "text", "id": "service_url", "label": "Remonto svetainė", "default": "https://pavaru-dezes.eu" },
+      { "type": "text", "id": "address", "label": "Adresas", "default": "Vasaros g. 44 / 44A, Marijampolė" },
+      { "type": "text", "id": "phone", "label": "Telefonas", "default": "+370 699 31163" },
+      { "type": "text", "id": "email", "label": "El. paštas", "default": "viktorma@inbox.lt" },
+      { "type": "url", "id": "facebook", "label": "Facebook nuoroda" },
+      { "type": "url", "id": "instagram", "label": "Instagram nuoroda" },
+      { "type": "text", "id": "company_name", "label": "Įmonės pavadinimas" },
+      { "type": "text", "id": "company_code", "label": "Įmonės kodas" },
+      { "type": "text", "id": "vat_code", "label": "PVM kodas" }
+    ]
+  }
+]

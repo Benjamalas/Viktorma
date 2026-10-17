@@ -1,0 +1,41 @@
+{%- comment -%}
+  Sends the shopper to the collection with the same filter params the filter sidebar uses.
+  The manufacturer/year filters must exist in Search & Discovery (README step 3).
+{%- endcomment -%}
+<section class="finder">
+  <div class="wrap">
+    <form class="finder-box reveal" action="{{ section.settings.collection.url | default: routes.all_products_collection_url }}" method="get">
+      <h2 class="display">Raskite dalį</h2>
+      <label>Gamintojas
+        <select name="filter.p.m.custom.manufacturer">
+          <option value="">Visi</option>
+          {%- assign makes = section.settings.manufacturers | newline_to_br | split: '<br />' -%}
+          {%- for m in makes %}{% assign m = m | strip %}{% if m != blank %}<option value="{{ m | escape }}">{{ m }}</option>{% endif %}{% endfor -%}
+        </select>
+      </label>
+      <label>Metai
+        <select name="filter.p.m.custom.years">
+          <option value="">Visi</option>
+          {%- for y in (section.settings.year_from..section.settings.year_to) reversed %}<option value="{{ y }}">{{ y }}</option>{% endfor -%}
+        </select>
+      </label>
+      <label>Dėžės kodas
+        <input type="search" name="q" placeholder="pvz. MA5, 20GP25" autocomplete="off">
+      </label>
+      <button class="btn btn-gold" type="submit">Ieškoti</button>
+    </form>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Dalių paieška",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Kolekcija" },
+    { "type": "textarea", "id": "manufacturers", "label": "Gamintojai (po vieną eilutėje)", "default": "Audi\nBMW\nFord\nMercedes-Benz\nOpel\nPeugeot\nRenault\nSkoda\nToyota\nVolkswagen\nVolvo" },
+    { "type": "range", "id": "year_from", "label": "Nuo metų", "min": 1980, "max": 2030, "step": 1, "default": 1995 },
+    { "type": "range", "id": "year_to", "label": "Iki metų", "min": 1980, "max": 2030, "step": 1, "default": 2026 }
+  ],
+  "presets": [{ "name": "Dalių paieška" }]
+}
+{% endschema %}

@@ -1,0 +1,17 @@
+{%- comment -%} Usage: render 'product-card', product: product {%- endcomment -%}
+<a class="card reveal" href="{{ product.url }}">
+  <div class="card-img">
+    {%- if product.featured_image -%}
+      {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 900px) 280px, 46vw', alt: product.title }}
+    {%- else -%}
+      <div class="ph">{{ 'product-1' | placeholder_svg_tag }}</div>
+    {%- endif -%}
+    {%- unless product.available %}<span class="badge">Išparduota</span>{% endunless -%}
+  </div>
+  <div class="card-body">
+    <span class="eyebrow">{{ product.metafields.custom.manufacturer.value | default: product.vendor }}</span>
+    <h3>{{ product.title }}</h3>
+    {%- if product.metafields.custom.gearbox_code != blank -%}<span class="code">{{ product.metafields.custom.gearbox_code.value }}</span>{%- endif -%}
+    {% render 'price', product: product %}
+  </div>
+</a>

@@ -1,0 +1,32 @@
+<header class="shop-head">
+  <div class="wrap shop-head-in">
+    <a class="logo" href="{{ routes.root_url }}" aria-label="Viktorma">VIKTORMA<span>DALYS</span></a>
+    <nav class="nav" aria-label="Pagrindinis">
+      {%- for link in linklists[section.settings.menu].links -%}
+        <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+      {%- endfor -%}
+      {%- if settings.service_url != blank -%}<a href="{{ settings.service_url }}" class="nav-ext">Remontas ↗</a>{%- endif -%}
+    </nav>
+    <div class="head-actions">
+      <button class="icon-btn" data-toggle="search" aria-label="Paieška" aria-expanded="false">{% render 'icon', name: 'search' %}</button>
+      <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="Krepšelis">{% render 'icon', name: 'cart' %}<b class="cart-count{% if cart.item_count == 0 %} zero{% endif %}">{{ cart.item_count }}</b></a>
+      <button class="icon-btn menu-btn" data-toggle="menu" aria-label="Meniu" aria-expanded="false">{% render 'icon', name: 'menu' %}</button>
+    </div>
+  </div>
+  <form class="head-search" action="{{ routes.search_url }}" method="get" role="search">
+    <div class="wrap">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Dėžės kodas, markė, modelis…" aria-label="Paieška" autocomplete="off">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button class="btn btn-gold" type="submit">Ieškoti</button>
+    </div>
+  </form>
+</header>
+
+{% schema %}
+{
+  "name": "Antraštė",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Meniu", "default": "main-menu" }
+  ]
+}
+{% endschema %}
