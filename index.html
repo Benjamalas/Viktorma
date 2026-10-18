@@ -5,213 +5,258 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Viktorma · Mechaninių pavarų dėžių servisas Marijampolėje</title>
 <meta name="description" content="Mechaninių pavarų dėžių diagnostika, kapitalinis remontas ir tepalų keitimas Marijampolėje. Be tarpininkų, su garantija.">
-<meta name="theme-color" content="#0b141c">
+<meta name="theme-color" content="#eceef1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
-<link rel="preload" as="image" href="assets/gearbox-600.webp" imagesrcset="assets/gearbox-600.webp 600w, assets/gearbox.webp 1200w" imagesizes="(min-width: 900px) 640px, 92vw">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="assets/theme.css">
 <style>
   /* Header */
   .top { position: fixed; inset: 0 0 auto; z-index: 50; display: flex; align-items: center; justify-content: space-between;
-    padding: max(14px, env(safe-area-inset-top)) var(--gutter) 14px; opacity: 0; transform: translateY(-10px);
-    transition: opacity .8s var(--ease) .3s, transform .8s var(--ease) .3s, background .4s; }
-  .ready .top { opacity: 1; transform: none; }
-  .top.solid { background: rgba(11, 20, 28, .82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-  .logo { font: 800 22px/1 var(--f-display); letter-spacing: .14em; text-decoration: none; }
-  .top-call { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--gold); }
-  .top-call svg { width: 18px; height: 18px; fill: currentColor; }
+    padding: calc(12px + env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) 12px var(--gutter);
+    opacity: 0; transition: opacity .8s var(--ease) .4s, background .4s, box-shadow .4s; }
+  .ready .top { opacity: 1; }
+  .top.solid { background: rgba(236, 238, 241, .86); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--line); }
+  .logo { font: 400 19px/1 var(--f-sans); font-stretch: 125%; letter-spacing: .16em; text-decoration: none; }
+  .top-call { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; background: var(--ink); color: var(--steel-2); font: 600 13px/1 var(--f-sans); text-decoration: none; }
+  .top-call svg { width: 14px; height: 14px; fill: currentColor; }
 
-  /* Hero: quiet screen, one line */
-  .hero { position: relative; overflow: hidden; min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 0 var(--gutter); }
-  .hero::before { content: ''; position: absolute; left: 50%; top: 50%; width: 120vmax; height: 120vmax; transform: translate(-50%, -50%);
-    background: radial-gradient(closest-side, rgba(201, 162, 39, .10), transparent 70%); pointer-events: none; }
-  .hero-line { position: relative; max-width: 15ch; margin: 18px auto 0; font: 600 clamp(30px, 8.5vw, 64px)/1.02 var(--f-display); text-transform: uppercase; }
-  .hero-line em { font-style: normal; color: var(--gold); }
-  .hero > div > * { opacity: 0; transform: translateY(16px); transition: opacity 1.2s var(--ease), transform 1.2s var(--ease); }
-  .ready .hero > div > * { opacity: 1; transform: none; }
-  .ready .hero .hero-line { transition-delay: .25s; }
-  .scroll-cue { position: absolute; left: 50%; bottom: max(28px, env(safe-area-inset-bottom)); transform: translateX(-50%);
-    display: grid; justify-items: center; gap: 10px; font: 700 10px/1 var(--f-mono); letter-spacing: .3em; text-transform: uppercase; color: var(--steel); }
-  .scroll-cue i { width: 1px; height: 46px; background: linear-gradient(var(--gold), transparent); animation: cue 2s var(--ease) infinite; transform-origin: top; }
-  @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+  /* Hero: quiet screen, one line, two meshing gears turning at the edge */
+  .hero { position: relative; min-height: 100svh; overflow: hidden; display: grid; align-content: center; }
+  .hero .wrap { position: relative; z-index: 2; }
+  .hero-line { font-size: clamp(34px, 10vw, 84px); max-width: 11ch; margin-top: 16px; }
+  .hero .lead { margin-top: 18px; }
+  .ready .hero .wrap > * { animation: rise 1.2s var(--ease) both; }
+  .ready .hero .wrap > :nth-child(2) { animation-delay: .15s; }
+  .ready .hero .wrap > :nth-child(3) { animation-delay: .3s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+  .mesh { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .mesh > div { position: absolute; }
+  .scroll-cue { position: absolute; z-index: 2; left: var(--gutter); bottom: calc(26px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 12px;
+    font: 600 10px/1 var(--f-mono); letter-spacing: .28em; text-transform: uppercase; color: var(--dim); }
+  .scroll-cue i { width: 40px; height: 1px; background: var(--ink); transform-origin: left; animation: cue 2.2s var(--ease) infinite; }
+  @keyframes cue { 0% { transform: scaleX(0); } 60% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
 
-  /* Story: sticky gearbox, three chapters scroll over it */
-  .story { position: relative; --p: 0; }
-  .stage { position: sticky; top: 0; height: 100svh; display: grid; place-items: start center; padding-top: 16svh; overflow: hidden; pointer-events: none; }
-  .stage img { width: min(92vw, 640px); height: auto;
-    opacity: min(1, calc(var(--p) * 6));
-    transform: translateX(calc((.5 - var(--p)) * var(--drift, 8vw))) rotate(calc((var(--p) - .5) * -14deg)) scale(calc(.82 + var(--p) * .36));
-    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, .55)); will-change: transform; }
-  .stage::after { content: ''; position: absolute; inset: auto 0 0; height: 55%; background: linear-gradient(transparent, var(--ink) 70%); }
-  .chapter { position: relative; z-index: 1; min-height: 100svh; display: flex; align-items: flex-end; padding: 0 0 14svh; }
+  /* Story: sticky stage with three illustrated scenes, chapters scroll over it */
+  .story { position: relative; }
+  .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; pointer-events: none; }
+  .scene { position: absolute; left: 50%; top: 13svh; width: min(84vw, 520px); aspect-ratio: 1; max-width: 100%; transform: translateX(-50%) scale(.86) rotate(-6deg); opacity: 0;
+    transition: opacity .8s var(--ease), transform 1.1s var(--ease); display: grid; place-items: center; }
+  .stage[data-step="1"] .s1, .stage[data-step="2"] .s2, .stage[data-step="3"] .s3 { opacity: 1; transform: translateX(-50%); }
+  .s1 .box { width: 92%; }
+  .waves { position: absolute; left: -4%; top: 22%; width: 40%; }
+  .waves path { fill: none; stroke: var(--green); stroke-width: 2; stroke-linecap: round; opacity: 0; animation: wave 2.4s ease-out infinite; transform-origin: 0 50%; }
+  .waves path:nth-child(2) { animation-delay: .4s; } .waves path:nth-child(3) { animation-delay: .8s; }
+  @keyframes wave { 0% { opacity: 0; transform: scale(.6); } 30% { opacity: 1; } 100% { opacity: 0; transform: scale(1.15); } }
+  .callout { position: absolute; font: 600 10px/1.3 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; color: var(--ink); }
+  .callout::before { content: ''; width: 26px; height: 1px; background: var(--ink); }
+  .s2 .cut { position: absolute; width: 62%; opacity: .9; }
+  .s2 .sh { position: absolute; width: 104%; bottom: 6%; }
+  .s2 .sh .g1, .s2 .sh .g2, .s2 .sh .g3 { transition: transform 1.4s var(--ease) .3s; }
+  .stage[data-step="2"] .sh .g1 { transform: translateX(-12px); }
+  .stage[data-step="2"] .sh .g3 { transform: translateX(14px); }
+  .s3 .cl { position: absolute; width: 62%; left: 2%; top: 14%; }
+  .s3 .br { position: absolute; width: 44%; right: 2%; bottom: 10%; }
+  .s3 .badge { position: absolute; width: 36%; right: 2%; top: 0; }
+  .badge { overflow: visible; }
+  .badge text { font: 600 8.5px var(--f-mono); letter-spacing: .12em; fill: var(--ink); }
+  .badge .core { fill: var(--green); }
+  .steps { position: absolute; left: var(--gutter); top: 50%; display: grid; gap: 8px; transform: translateY(-50%); }
+  .steps i { width: 3px; height: 22px; border-radius: 2px; background: var(--line); transition: background .4s, height .4s; }
+  .stage[data-step="1"] .steps i:nth-child(1), .stage[data-step="2"] .steps i:nth-child(2), .stage[data-step="3"] .steps i:nth-child(3) { background: var(--green); height: 40px; }
+
+  .chapter { position: relative; z-index: 2; min-height: 100svh; display: flex; align-items: flex-end; padding-bottom: 9svh; }
   .chapter:first-of-type { margin-top: -100svh; }
-  .chapter .wrap { max-width: 640px; margin-left: 0; padding-top: 48px; padding-bottom: 24px;
-    background: radial-gradient(120% 90% at 30% 60%, rgba(11, 20, 28, .94) 40%, rgba(11, 20, 28, 0) 75%); }
-  .chapter-num { font: 800 clamp(64px, 20vw, 120px)/.8 var(--f-display); color: transparent; -webkit-text-stroke: 1px var(--line); margin-bottom: 8px; }
-  .chapter h2 { font-size: clamp(38px, 11vw, 76px); margin: 10px 0 18px; }
-  .chapter p { margin: 0; max-width: 34ch; font-size: clamp(17px, 4.4vw, 20px); color: var(--steel-2); }
+  .chapter .wrap > div { max-width: 560px; padding-top: 70px;
+    background: linear-gradient(to bottom, rgba(236, 238, 241, 0), var(--steel) 60px); }
+  .chapter .num { font: 600 11px/1 var(--f-mono); color: var(--dim); letter-spacing: .2em; }
+  .chapter h2 { font-size: clamp(36px, 10.5vw, 72px); margin: 12px 0 14px; }
+  .chapter p { margin: 0; color: var(--dim); max-width: 34ch; font-size: clamp(16px, 4.3vw, 19px); }
   @media (min-width: 900px) {
-    .stage { place-items: center end; padding: 0 var(--gutter) 0 0; --drift: 16vw; }
-    .chapter .wrap { background: none; }
-    .stage::after { display: none; }
+    .scene { left: auto; right: max(4vw, calc((100vw - var(--max)) / 2)); top: 50%; transform: translateY(-50%) scale(.86) rotate(-6deg); width: min(44vw, 560px); }
+    .stage[data-step="1"] .s1, .stage[data-step="2"] .s2, .stage[data-step="3"] .s3 { transform: translateY(-50%); }
     .chapter { align-items: center; padding: 0; }
-    .chapter .wrap { margin-left: max(0px, calc((100vw - var(--max)) / 2)); }
+    .chapter .wrap > div { background: none; padding: 0 0 0 40px; }
+    .steps { left: max(var(--gutter), calc((100vw - var(--max)) / 2)); }
   }
 
   /* CTA */
-  .cta { min-height: 92svh; display: grid; place-items: center; text-align: center; padding: 80px 0; position: relative; }
-  .cta h2 { font-size: clamp(46px, 14vw, 120px); margin: 18px 0 28px; }
-  .cta h2 em { font-style: normal; color: var(--gold); }
-  .cta-actions { display: grid; gap: 12px; justify-content: center; }
-  .cta-note { margin-top: 18px; font-size: 14px; color: var(--steel); }
-  @media (min-width: 560px) { .cta-actions { grid-auto-flow: column; } }
+  .cta { position: relative; overflow: hidden; padding: 120px 0; min-height: 88svh; display: grid; align-content: center; }
+  .cta .wrap { position: relative; z-index: 1; }
+  .cta h2 { font-size: clamp(44px, 13vw, 112px); margin: 16px 0 22px; max-width: 10ch; }
+  .cta h2 em { color: #5fd39a; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .cta-note { margin-top: 20px; font: 400 13px/1.5 var(--f-mono); color: #8d96a0; }
 
   /* Info sections */
-  .section { padding: 96px 0; border-top: 1px solid var(--line); }
-  .section-head { margin-bottom: 40px; }
-  .section-head h2 { font-size: clamp(36px, 9vw, 64px); margin-top: 12px; }
-  .services { display: grid; gap: 14px; grid-template-columns: 1fr; }
-  .card { background: var(--ink-3); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
-  .card h3 { margin: 0 0 8px; font: 700 24px/1.1 var(--f-display); text-transform: uppercase; letter-spacing: .02em; }
-  .card p { margin: 0; color: var(--steel-2); font-size: 16px; }
-  .card .n { font: 700 11px/1 var(--f-mono); color: var(--gold); letter-spacing: .2em; display: block; margin-bottom: 18px; }
-  .card-gold { background: var(--gold); color: var(--ink); border-color: var(--gold); }
-  .card-gold p { color: var(--ink-3); }
-  .card-gold a { font: 700 15px/1 var(--f-display); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; display: inline-block; margin-top: 18px; }
+  .section { position: relative; padding: 96px 0; }
+  .section-head { display: grid; gap: 12px; margin-bottom: 36px; }
+  .section-head h2 { font-size: clamp(34px, 9vw, 60px); }
+  .services { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  .card { position: relative; overflow: hidden; background: var(--steel-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 24px 26px; display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: start; }
+  .card .ico { width: 64px; }
+  .card .ico .part-svg { transition: transform 1.2s var(--ease); }
+  .card:hover .ico .part-svg { transform: rotate(90deg); }
+  .card h3 { margin: 4px 0 6px; font: 700 20px/1.15 var(--f-sans); font-stretch: 108%; letter-spacing: -.01em; }
+  .card p { margin: 0; color: var(--dim); font-size: 15.5px; }
+  .card-ink { background: var(--ink); color: var(--steel-2); border-color: var(--ink); }
+  .card-ink p { color: #9aa3ad; }
+  .card-ink a { display: inline-block; margin-top: 14px; color: #5fd39a; font-weight: 600; text-decoration: none; }
   @media (min-width: 640px) { .services { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 980px) { .services { grid-template-columns: repeat(3, 1fr); } }
 
-  .proof { display: grid; gap: 28px; grid-template-columns: 1fr; text-align: left; }
-  .proof b { display: block; font: 800 clamp(40px, 11vw, 64px)/1 var(--f-display); text-transform: uppercase; }
-  .proof span { color: var(--steel); font-size: 15px; }
-  @media (min-width: 760px) { .proof { grid-template-columns: repeat(3, 1fr); } }
+  .proof { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); }
+  .proof div { padding: 18px 10px 0 0; }
+  .proof b { display: block; font: 600 clamp(30px, 9vw, 64px)/1 var(--f-sans); font-stretch: 75%; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .proof span { font-size: 13px; color: var(--dim); }
 
-  .parts { display: grid; gap: 24px; align-items: center; background: linear-gradient(135deg, var(--ink-3), var(--ink-2)); border: 1px solid var(--line); border-radius: 22px; padding: 34px 26px; overflow: hidden; }
-  .parts h2 { font-size: clamp(34px, 9vw, 56px); margin: 12px 0 14px; }
-  .parts p { margin: 0 0 24px; color: var(--steel-2); max-width: 40ch; }
-  .parts img { width: 100%; max-width: 420px; justify-self: center; opacity: .9; }
-  @media (min-width: 860px) { .parts { grid-template-columns: 1.2fr 1fr; padding: 56px; } }
+  .shop { position: relative; overflow: hidden; border-radius: 28px; padding: 40px 26px 220px; }
+  .shop .txt { position: relative; z-index: 1; max-width: 460px; }
+  .shop h2 { font-size: clamp(34px, 9vw, 58px); margin: 14px 0 14px; }
+  .shop p { margin: 0 0 26px; }
+  @media (min-width: 860px) { .shop { padding: 64px 56px; } }
 
-  .contact { display: grid; gap: 28px; grid-template-columns: 1fr 1fr; }
-  .contact h4 { margin: 0 0 8px; font: 700 11px/1.4 var(--f-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--steel); }
-  .contact p { margin: 0; font-size: 17px; }
+  .contact { display: grid; gap: 26px; grid-template-columns: 1fr 1fr; }
+  .contact h4 { margin: 0 0 8px; font: 600 11px/1.4 var(--f-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
+  .contact p { margin: 0; }
   .contact a { text-decoration: none; }
-  .contact a:hover { color: var(--gold); }
-  .contact-actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .contact a:hover { color: var(--green); }
+  .contact-actions { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
   @media (min-width: 860px) { .contact { grid-template-columns: repeat(4, 1fr); } }
 </style>
 </head>
 <body>
 
 <div class="intro" aria-hidden="true">
-  <div class="intro-word"><span style="--i:0">V</span><span style="--i:1">I</span><span style="--i:2">K</span><span style="--i:3">T</span><span style="--i:4">O</span><span style="--i:5">R</span><span style="--i:6">M</span><span style="--i:7">A</span></div>
-  <div class="intro-bar"></div>
+  <div class="intro-in">
+    <div class="intro-word"><span style="--i:0">V</span><span style="--i:1">I</span><span style="--i:2">K</span><span style="--i:3">T</span><span style="--i:4">O</span><span style="--i:5">R</span><span style="--i:6">M</span><span style="--i:7">A</span></div>
+    <div class="intro-gear tone-green" data-part="gear:12"></div>
+  </div>
 </div>
 
 <header class="top" id="top">
   <a class="logo" href="#">VIKTORMA</a>
-  <a class="top-call" href="tel:+37069931163" aria-label="Skambinti +370 699 31163">
-    <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>
-  </a>
+  <a class="top-call" href="tel:+37069931163"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>Skambinti</a>
 </header>
 
 <main>
   <section class="hero">
-    <div>
+    <div class="field" data-field="bearing,6,9,70,1.4,line;sprocket:14,74,12,54,2,line;gear:10,60,28,36,2.6,steel;clutch,-6,46,90,.8,line"></div>
+    <div class="mesh" id="mesh" aria-hidden="true"></div>
+    <div class="wrap">
       <p class="eyebrow">Marijampolė · Mechaninės pavarų dėžės</p>
-      <p class="hero-line">Kiekviena pavara turi savo <em>istoriją</em></p>
+      <h1 class="display hero-line">Kiekviena pavara turi savo <em>istoriją</em></h1>
+      <p class="lead">Slinkite ir pamatysite, kaip ji vėl atgyja.</p>
     </div>
     <div class="scroll-cue">Slinkite<i></i></div>
   </section>
 
-  <section class="story" data-progress aria-label="Viktorma istorija">
-    <div class="stage" aria-hidden="true">
-      <img src="assets/gearbox-600.webp" srcset="assets/gearbox-600.webp 600w, assets/gearbox.webp 1200w" sizes="(min-width: 900px) 640px, 92vw" alt="" width="1200" height="738">
+  <section class="story" aria-label="Viktorma istorija">
+    <div class="stage" id="stage" data-step="1" aria-hidden="true">
+      <div class="steps"><i></i><i></i><i></i></div>
+      <div class="scene s1">
+        <div class="box tone-steel" data-part="gearbox"></div>
+        <svg class="waves" viewBox="0 0 60 100"><path d="M20,30 Q32,50 20,70"/><path d="M30,20 Q48,50 30,80"/><path d="M40,10 Q64,50 40,90"/></svg>
+        <span class="callout" style="right:2%;top:12%">Klausomės</span>
+        <span class="callout" style="left:30%;bottom:16%">Matuojame</span>
+      </div>
+      <div class="scene s2">
+        <div class="cut tone-white spin" style="--spin:40s" data-part="cutaway:28"></div>
+        <div class="sh tone-steel" data-part="shaft"></div>
+        <span class="callout" style="left:0;top:8%">Tolerancija 0,02 mm</span>
+      </div>
+      <div class="scene s3">
+        <div class="cl tone-steel spin" style="--spin:30s" data-part="clutch"></div>
+        <div class="br tone-white spin" style="--spin:16s;--dir:reverse" data-part="bearing"></div>
+        <svg class="badge" viewBox="0 0 100 100">
+          <defs><path id="bp" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+          <circle class="core" cx="50" cy="50" r="22"/>
+          <path d="M40,50 l7,7 l13,-14" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <g class="spin" style="--spin:26s;transform-origin:50px 50px"><text><textPath href="#bp">GARANTIJA · ORIGINALŪS REMKOMPLEKTAI ·</textPath></text></g>
+        </svg>
+      </div>
     </div>
 
-    <article class="chapter">
-      <div class="wrap reveal">
-        <div class="chapter-num">01</div>
-        <p class="eyebrow">Diagnostika</p>
+    <article class="chapter" data-step="1">
+      <div class="wrap"><div class="reveal">
+        <span class="num">01 / 03 · Diagnostika</span>
         <h2 class="display">Viskas prasideda nuo garso</h2>
-        <p>Meistras pravažiuoja jūsų automobiliu ir išgirsta, kas negerai. Gedimą nustatome prieš remontą, kad iš anksto žinotumėte, kas ir kiek kainuos.</p>
-      </div>
+        <p>Meistras pravažiuoja jūsų automobiliu ir išgirsta, kas negerai. Gedimą nustatome prieš remontą, todėl kainą žinote iš anksto.</p>
+      </div></div>
     </article>
-
-    <article class="chapter">
-      <div class="wrap reveal">
-        <div class="chapter-num">02</div>
-        <p class="eyebrow">Remontas</p>
+    <article class="chapter" data-step="2">
+      <div class="wrap"><div class="reveal">
+        <span class="num">02 / 03 · Remontas</span>
         <h2 class="display">Tada kalba rankos</h2>
-        <p>Ardome, matuojame ir atstatome dėžę iki gamyklinių parametrų. Viską darome patys, savo dirbtuvėje Vasaros gatvėje. Nevežame kitiems.</p>
-      </div>
+        <p>Ardome, matuojame kiekvieną guolį ir krumpliaratį, atstatome iki gamyklinių parametrų. Viską darome patys, savo dirbtuvėje. Nevežame kitiems.</p>
+      </div></div>
     </article>
-
-    <article class="chapter">
-      <div class="wrap reveal">
-        <div class="chapter-num">03</div>
-        <p class="eyebrow">Garantija</p>
+    <article class="chapter" data-step="3">
+      <div class="wrap"><div class="reveal">
+        <span class="num">03 / 03 · Garantija</span>
         <h2 class="display">Ir žodis, kurio laikomės</h2>
         <p>Originalūs remkomplektai ir garantija kiekvienam atliktam darbui. Visų markių mechaninės pavarų dėžės.</p>
-      </div>
+      </div></div>
     </article>
   </section>
 
-  <section class="cta" id="registracija">
+  <section class="cta dark" id="registracija">
+    <div class="field" data-field="gear:30,62,8,260,.6,nightline;cutaway:20,-12,60,180,1.2,night;sprocket:16,78,70,110,1.8,night;bearing,40,90,70,2.4,nightline"></div>
     <div class="wrap reveal">
       <p class="eyebrow">Jūsų eilė</p>
       <h2 class="display">Dėžė vėl važiuos <em>kaip nauja</em></h2>
+      <p class="lead">Paskambinkite ir susitarsime laiką. Meistras apžiūrės automobilį ir pasakys, ką reikia daryti.</p>
       <div class="cta-actions">
-        <a class="btn btn-gold" href="tel:+37069931163">Registruotis remontui</a>
-        <a class="btn btn-ghost" href="#kontaktai">Kaip mus rasti</a>
+        <a class="btn btn-green" href="tel:+37069931163">Registruotis remontui <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn btn-line" href="#kontaktai">Kaip mus rasti</a>
       </div>
       <p class="cta-note">I–V 9:00–18:00 · +370 699 31163</p>
     </div>
   </section>
 
   <section class="section" id="paslaugos">
-    <div class="wrap">
+    <div class="field" data-field="gear:22,84,4,120,1,line;bearing,-8,58,110,1.6,line"></div>
+    <div class="wrap" style="position:relative;z-index:1">
       <div class="section-head reveal">
         <p class="eyebrow">Paslaugos</p>
         <h2 class="display">Ką galime padaryti jūsų dėžei</h2>
       </div>
       <div class="services">
-        <div class="card reveal"><span class="n">01</span><h3>Kapitalinis remontas</h3><p>Ardome, matuojame ir atstatome pavarų dėžę iki gamyklinių parametrų su kokybiškais remkomplektais.</p></div>
-        <div class="card reveal" data-delay="1"><span class="n">02</span><h3>Gedimų diagnostika</h3><p>Tiksliai nustatome gedimą prieš remontą, kad žinotumėte, kas ir kiek kainuos.</p></div>
-        <div class="card reveal" data-delay="2"><span class="n">03</span><h3>Tepalų ir filtrų keitimas</h3><p>Profilaktinis keitimas, kuris pailgina dėžės tarnavimą ir apsaugo nuo brangaus remonto.</p></div>
-        <div class="card reveal"><span class="n">04</span><h3>Mechaninės dėžės montavimas</h3><p>Perdarymas iš automatinės į mechaninę bei sankabos komplekto keitimas.</p></div>
-        <div class="card reveal" data-delay="1"><span class="n">05</span><h3>Trumpesnės eigos svirtys</h3><p>Short-shifter sistemos ir modifikacijos aiškesniam, tikslesniam pavarų jungimui.</p></div>
-        <div class="card card-gold reveal" data-delay="2"><h3>Nežinote, kur bėda?</h3><p>Atveškite automobilį. Meistras pravažiuos ir nustatys gedimą.</p><a href="tel:+37069931163">Užsakyti diagnostiką →</a></div>
+        <div class="card reveal"><div class="ico tone-steel" data-part="gearbox"></div><div><h3>Kapitalinis remontas</h3><p>Ardome, matuojame ir atstatome pavarų dėžę iki gamyklinių parametrų su kokybiškais remkomplektais.</p></div></div>
+        <div class="card reveal" data-delay="1"><div class="ico tone-white" data-part="bearing"></div><div><h3>Gedimų diagnostika</h3><p>Tiksliai nustatome gedimą prieš remontą, kad žinotumėte, kas ir kiek kainuos.</p></div></div>
+        <div class="card reveal" data-delay="2"><div class="ico tone-brass" data-part="gear:16"></div><div><h3>Tepalų ir filtrų keitimas</h3><p>Profilaktinis keitimas pailgina dėžės tarnavimą ir apsaugo nuo brangaus remonto.</p></div></div>
+        <div class="card reveal"><div class="ico tone-steel" data-part="clutch"></div><div><h3>Mechaninės dėžės montavimas</h3><p>Perdarymas iš automatinės į mechaninę bei sankabos komplekto keitimas.</p></div></div>
+        <div class="card reveal" data-delay="1"><div class="ico tone-white" data-part="cutaway:20"></div><div><h3>Trumpesnės eigos svirtys</h3><p>Short-shifter sistemos aiškesniam, tikslesniam pavarų jungimui.</p></div></div>
+        <div class="card card-ink reveal" data-delay="2"><div class="ico tone-green" data-part="sprocket:14"></div><div><h3>Nežinote, kur bėda?</h3><p>Atveškite automobilį. Meistras pravažiuos ir nustatys gedimą.</p><a href="tel:+37069931163">Užsakyti diagnostiką →</a></div></div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="kodel">
+  <section class="section" id="kodel" style="padding-top:24px">
     <div class="wrap">
-      <div class="proof">
-        <div class="reveal"><b>Visos markės</b><span>mechaninės pavarų dėžės</span></div>
-        <div class="reveal" data-delay="1"><b>Be tarpininkų</b><span>visą darbą atliekame patys</span></div>
-        <div class="reveal" data-delay="2"><b>Garantija</b><span>suteikiama atliktiems darbams</span></div>
+      <div class="proof reveal">
+        <div><b>Visos</b><span>automobilių markės</span></div>
+        <div><b>0</b><span>tarpininkų</span></div>
+        <div><b>100%</b><span>darbų su garantija</span></div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="dalys">
+  <section class="section" id="dalys" style="padding-top:24px">
     <div class="wrap">
-      <div class="parts reveal">
-        <div>
+      <div class="shop dark reveal">
+        <div class="field" data-field="sprocket:18,52,58,200,.5,night;gear:12,20,72,120,1.2,green;bearing,78,40,90,1.6,nightline"></div>
+        <div class="txt">
           <p class="eyebrow">Dalys</p>
           <h2 class="display">Dalių parduotuvė jau ruošiama</h2>
-          <p>Netrukus visas pavarų dėžių dalis rasite čia, su paieška pagal gamintoją, metus ir modelį. Kol kas pigesnių dalių ieškokite rrr.lt.</p>
-          <a class="btn btn-ghost" href="https://rrr.lt" target="_blank" rel="noopener">Dalys rrr.lt</a>
+          <p class="lead">Netrukus visas pavarų dėžių dalis rasite čia, su paieška pagal gamintoją, metus ir modelį. Kol kas pigesnių dalių ieškokite rrr.lt.</p>
+          <a class="btn btn-line" href="https://rrr.lt" target="_blank" rel="noopener">Dalys rrr.lt <span class="arr" aria-hidden="true">↗</span></a>
         </div>
-        <img src="assets/gearbox-600.webp" alt="Mechaninė pavarų dėžė" width="600" height="369" loading="lazy">
       </div>
     </div>
   </section>
 
-  <section class="section" id="kontaktai">
+  <section class="section" id="kontaktai" style="padding-top:24px">
     <div class="wrap">
       <div class="section-head reveal">
         <p class="eyebrow">Kontaktai</p>
@@ -221,22 +266,23 @@
         <div><h4>Servisas</h4><p>Vasaros g. 44 / 44A<br>LT-68111 Marijampolė</p></div>
         <div><h4>Telefonai</h4><p><a href="tel:+37069931163">+370 699 31163</a><br><a href="tel:+37060868400">+370 608 68400</a></p></div>
         <div><h4>El. paštas</h4><p><a href="mailto:viktorma@inbox.lt">viktorma@inbox.lt</a></p></div>
-        <div><h4>Darbo laikas</h4><p>I–V 9:00–18:00<br><span class="muted">Savaitgaliais nedirbame</span></p></div>
+        <div><h4>Darbo laikas</h4><p>I–V 9:00–18:00<br><span style="color:var(--dim)">Savaitgaliais nedirbame</span></p></div>
       </div>
       <div class="contact-actions reveal">
-        <a class="btn btn-gold" href="tel:+37069931163">Skambinti</a>
-        <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Vasaros+g.+44,+Marijampol%C4%97" target="_blank" rel="noopener">Atidaryti žemėlapį</a>
+        <a class="btn btn-ink" href="tel:+37069931163">Skambinti</a>
+        <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Vasaros+g.+44,+Marijampol%C4%97" target="_blank" rel="noopener">Atidaryti žemėlapį <span class="arr" aria-hidden="true">↗</span></a>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer dark">
+  <div class="field" data-field="gear:24,80,10,220,.6,nightline;clutch,-10,60,160,1,nightline"></div>
   <div class="wrap">
     <div class="footer-grid">
       <div>
         <div class="footer-brand">VIKTORMA</div>
-        <p class="muted" style="margin-top:10px">Mechaninių pavarų dėžių servisas Marijampolėje.</p>
+        <p style="margin-top:12px;color:#8d96a0">Mechaninių pavarų dėžių servisas Marijampolėje.</p>
         <!-- TODO: replace # with the real social profile links -->
         <div class="socials">
           <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></a>
@@ -245,7 +291,7 @@
       </div>
       <div>
         <h4>Kontaktai</h4>
-        <p>Vasaros g. 44 / 44A, Marijampolė</p>
+        <p>Vasaros g. 44 / 44A</p>
         <p><a href="tel:+37069931163">+370 699 31163</a></p>
         <p><a href="mailto:viktorma@inbox.lt">viktorma@inbox.lt</a></p>
       </div>
@@ -259,25 +305,67 @@
         <h4>Rekvizitai</h4>
         <!-- TODO: fill in the real company details -->
         <p>[Įmonės pavadinimas]</p>
-        <p>Įmonės kodas: [000000000]</p>
-        <p>PVM kodas: [LT000000000]</p>
+        <p>Įm. kodas [000000000]</p>
+        <p>PVM [LT000000000]</p>
       </div>
     </div>
     <div class="footer-base">
-      <span>© <span id="yr">2026</span> Viktorma · Visos teisės saugomos</span>
-      <span><a href="#">Privatumo politika</a> · <a href="#">Slapukų politika</a></span>
+      <span>© <span id="yr">2026</span> Viktorma</span>
+      <span><a href="#">Privatumo politika</a> · <a href="#">Slapukai</a></span>
       <span>Svetainę kuria ir prižiūri <a href="https://kilk.pro" target="_blank" rel="noopener">Kilk.pro</a></span>
     </div>
   </div>
 </footer>
 
+<script src="assets/parts.js"></script>
 <script src="assets/motion.js" defer></script>
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Header turns solid after the hero.
   (function () {
     var top = document.getElementById('top');
-    var f = function () { top.classList.toggle('solid', scrollY > innerHeight * .6); };
+    var f = function () { top.classList.toggle('solid', scrollY > innerHeight * .7); };
     addEventListener('scroll', f, { passive: true }); f();
+  })();
+
+  // Story: the chapter in view picks the scene on the sticky stage.
+  (function () {
+    var stage = document.getElementById('stage');
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) stage.dataset.step = e.target.dataset.step; });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    document.querySelectorAll('.chapter').forEach(function (c) { io.observe(c); });
+  })();
+
+  // Hero: a 24-tooth gear driving a 12-tooth pinion, meshed, turning with time and scroll.
+  (function () {
+    var mesh = document.getElementById('mesh');
+    var a = document.createElement('div'), b = document.createElement('div');
+    a.className = 'tone-steel'; b.className = 'tone-green';
+    a.innerHTML = VParts.gear({ n: 24, holes: 6 }); b.innerHTML = VParts.gear({ n: 12 });
+    mesh.append(a, b);
+    var TAU = Math.PI * 2, pA = TAU / 24, pB = TAU / 12, th = -2.45, A0, B0, cx, cy, wA, wB;
+    function layout() {
+      var W = mesh.clientWidth, H = mesh.clientHeight, big = W < 900;
+      wA = big ? Math.min(W * 1.05, 520) : Math.min(W * .42, 620); wB = wA / 2;
+      cx = big ? W * .92 : W * .82; cy = big ? H * .97 : H * .62;
+      var D = wA / 2 * .96 + wB / 2 * .9;   // sum of pitch radii (tooth depth differs per gear)
+      var bx = cx + Math.cos(th) * D, by = cy + Math.sin(th) * D;
+      a.style.cssText = 'width:' + wA + 'px;left:' + (cx - wA / 2) + 'px;top:' + (cy - wA / 2) + 'px';
+      b.style.cssText = 'width:' + wB + 'px;left:' + (bx - wB / 2) + 'px;top:' + (by - wB / 2) + 'px';
+      A0 = th + .175 * pA; B0 = th + Math.PI - .325 * pB;   // valley of A faces a tooth of B on the centre line
+    }
+    layout(); addEventListener('resize', layout);
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function frame(t) {
+      var phi = reduce ? 0 : t / 1000 * .12 + scrollY * .002;
+      a.style.transform = 'rotate(' + (A0 + phi) + 'rad)';
+      b.style.transform = 'rotate(' + (B0 - 2 * phi) + 'rad)';
+      if (!reduce && scrollY < innerHeight * 1.2) requestAnimationFrame(frame); else if (!reduce) setTimeout(function () { requestAnimationFrame(frame); }, 300);
+    }
+    requestAnimationFrame(frame);
   })();
 </script>
 </body>
