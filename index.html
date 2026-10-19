@@ -95,15 +95,17 @@
   .services { display: grid; gap: 12px; grid-template-columns: 1fr; }
   .fix h2 { max-width: 12ch; }
   .fix { overflow: hidden; }
-  .cloud { position: relative; width: min(100%, 540px); aspect-ratio: 1 / 1.05; margin: 10px auto 0; }
-  .cloud::before { content: ''; position: absolute; left: 50%; top: 50%; width: 62%; aspect-ratio: 1; transform: translate(-50%, -50%); border: 1px dashed var(--line); border-radius: 50%; }
-  .cloud .core { position: absolute; left: 50%; top: 50%; width: 26%; transform: translate(-50%, -50%); }
-  .sym { position: absolute; white-space: nowrap; font: 600 13px/1 var(--f-sans); padding: 10px 14px; border-radius: 999px; background: var(--steel-2); border: 1px solid var(--line);
-    box-shadow: 0 6px 16px rgba(18, 20, 23, .08); animation: drift var(--bob, 6s) ease-in-out infinite alternate; }
-  .sym.k { background: var(--ink); color: var(--steel-2); border-color: var(--ink); }
-  @keyframes drift { from { transform: translateY(-5px) rotate(var(--tilt, 0deg)); } to { transform: translateY(5px) rotate(calc(var(--tilt, 0deg) * -1)); } }
+  .words { position: relative; width: 100vw; margin: 4px 0 0 calc(50% - 50vw); max-width: none; height: clamp(300px, 82vw, 440px); }
+  .words .core { position: absolute; left: 50%; top: 50%; width: clamp(58px, 15vw, 96px); transform: translate(-50%, -50%); opacity: .9; }
+  .w { position: absolute; white-space: nowrap; font: 500 14px/1 var(--f-sans); color: var(--dim); will-change: transform;
+    animation: float var(--t, 8s) ease-in-out infinite alternate; }
+  .w.m { font-size: 17px; color: var(--ink); }
+  .w.l { font-size: clamp(20px, 5.6vw, 34px); font-weight: 700; font-stretch: 108%; color: var(--ink); letter-spacing: -.01em; }
+  .w.g { color: var(--green); }
+  @keyframes float { from { transform: translate(calc(var(--dx) * -1), calc(var(--dy) * -1)); } to { transform: translate(var(--dx), var(--dy)); } }
+  @media (min-width: 900px) { .words { width: min(100vw, 1100px); margin-left: auto; margin-right: auto; height: 380px; } }
   .fix-line { max-width: 40ch; margin: 18px auto 0; text-align: center; color: var(--dim); }
-  .proof { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); }
+  .proof { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--ink); }
   .proof div { padding: 18px 10px 0 0; }
   .proof b { display: block; font: 600 clamp(30px, 9vw, 64px)/1 var(--f-sans); font-stretch: 75%; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
   .proof span { font-size: 13px; color: var(--dim); }
@@ -193,7 +195,7 @@
       <div class="wrap"><div class="reveal">
         <span class="num">03 / 03 · Garantija</span>
         <h2 class="display">Ir žodis, kurio laikomės</h2>
-        <p>Originalūs remkomplektai ir garantija kiekvienam atliktam darbui. Visų markių mechaninės pavarų dėžės.</p>
+        <p>Originalūs remkomplektai ir garantija kiekvienam atliktam darbui.</p>
       </div></div>
     </article>
   </section>
@@ -219,20 +221,27 @@
         <p class="eyebrow">Mechaninės pavarų dėžės</p>
         <h2 class="display">Kad ir kas negerai, <em>sutaisome</em></h2>
       </div>
-      <div class="cloud reveal" aria-label="Gedimai, kuriuos taisome">
-        <div class="core tone-green spin" style="--spin:24s" data-part="gear:16"></div>
-        <span class="sym" style="left:3%;top:4%;--bob:5.0s;--tilt:-3deg">Traška jungiant</span>
-        <span class="sym" style="right:4%;top:9%;--bob:6.3s;--tilt:2deg">Ūžia guolis</span>
-        <span class="sym k" style="left:27%;top:19%;--bob:7.6s;--tilt:-1deg">Nejunga pavara</span>
-        <span class="sym" style="left:0;top:35%;--bob:8.9s;--tilt:3deg">Teka tepalas</span>
-        <span class="sym" style="right:0;top:33%;--bob:5.0s;--tilt:-2deg">Iššoka pavara</span>
-        <span class="sym k" style="left:3%;top:62%;--bob:6.3s;--tilt:-3deg">Kietas pedalas</span>
-        <span class="sym" style="right:2%;top:60%;--bob:7.6s;--tilt:2deg">Slysta sankaba</span>
-        <span class="sym" style="left:22%;top:76%;--bob:8.9s;--tilt:-1deg">Kaukia važiuojant</span>
-        <span class="sym" style="left:0;top:91%;--bob:5.0s;--tilt:3deg">Vibruoja svirtis</span>
-        <span class="sym k" style="right:3%;top:89%;--bob:6.3s;--tilt:-2deg">Neaiškus garsas</span>
+      <div class="words reveal" aria-label="Gedimai, kuriuos taisome">
+        <div class="core tone-green spin" style="--spin:24s" data-part="gear:14"></div>
+        <span class="w s" style="left:4%;top:0%;--dx:4px;--dy:-5px;--t:7.0s">Dūzgia ant tuščios</span>
+        <span class="w m" style="right:4%;top:1%;--dx:-6px;--dy:4px;--t:8.4s">Iššoka pavara</span>
+        <span class="w l" style="left:3%;top:11%;--dx:5px;--dy:-3px;--t:9.8s">Traška jungiant</span>
+        <span class="w s" style="right:3%;top:13%;--dx:-3px;--dy:6px;--t:11.2s">Ūžia guolis</span>
+        <span class="w l g" style="left:22%;top:24%;--dx:7px;--dy:-4px;--t:12.6s">Nejunga pavara</span>
+        <span class="w m" style="left:2%;top:36%;--dx:4px;--dy:-5px;--t:7.0s">Teka tepalas</span>
+        <span class="w m" style="right:2%;top:37%;--dx:-6px;--dy:4px;--t:8.4s">Kietas pedalas</span>
+        <span class="w s" style="left:4%;top:48%;--dx:5px;--dy:-3px;--t:9.8s">Slysta sankaba</span>
+        <span class="w s" style="right:4%;top:49%;--dx:-3px;--dy:6px;--t:11.2s">Ūžia greitėjant</span>
+        <span class="w s" style="left:3%;top:63%;--dx:7px;--dy:-4px;--t:12.6s">Barška stovint</span>
+        <span class="w l" style="right:3%;top:64%;--dx:4px;--dy:-5px;--t:7.0s">Kaukia važiuojant</span>
+        <span class="w m" style="left:8%;top:72%;--dx:-6px;--dy:4px;--t:8.4s">Vibruoja svirtis</span>
+        <span class="w s" style="right:6%;top:73%;--dx:5px;--dy:-3px;--t:9.8s">Trūksta pavaros</span>
+        <span class="w m g" style="left:3%;top:82%;--dx:-3px;--dy:6px;--t:11.2s">Sunkiai jungiasi</span>
+        <span class="w s" style="right:4%;top:83%;--dx:7px;--dy:-4px;--t:12.6s">Klibėja svirtis</span>
+        <span class="w s" style="left:6%;top:93%;--dx:4px;--dy:-5px;--t:7.0s">Kvepia degėsiais</span>
+        <span class="w l" style="right:3%;top:90%;--dx:-6px;--dy:4px;--t:8.4s">Neaiškus garsas</span>
       </div>
-      <p class="fix-line reveal">Nereikia žinoti, kaip vadinasi gedimas. Atveškite automobilį: išklausysime, surasime priežastį ir sutaisysime. Visų markių mechanines dėžes, su garantija.</p>
+      <p class="fix-line reveal">Nereikia žinoti, kaip vadinasi gedimas. Atveškite automobilį: išklausysime, surasime priežastį ir sutaisysime. Atliktiems darbams suteikiame garantiją.</p>
       <div class="reveal" style="text-align:center;margin-top:26px"><a class="btn btn-ink" href="tel:+37069931163">Aprašykite gedimą telefonu <span class="arr" aria-hidden="true">→</span></a></div>
 
     </div>
@@ -241,7 +250,6 @@
   <section class="section" id="kodel" style="padding-top:24px">
     <div class="wrap">
       <div class="proof reveal">
-        <div><b>Visos</b><span>automobilių markės</span></div>
         <div><b>0</b><span>tarpininkų</span></div>
         <div><b>100%</b><span>darbų su garantija</span></div>
       </div>
