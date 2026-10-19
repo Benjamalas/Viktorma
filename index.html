@@ -96,11 +96,10 @@
   .fix h2 { max-width: 12ch; }
   .fix { overflow: hidden; }
   .words { position: relative; width: 100vw; margin: 4px 0 0 calc(50% - 50vw); max-width: none; height: clamp(300px, 82vw, 440px); }
-  .words .core { position: absolute; left: 50%; top: 50%; width: clamp(58px, 15vw, 96px); transform: translate(-50%, -50%); opacity: .9; }
-  .w { position: absolute; white-space: nowrap; font: 500 14px/1 var(--f-sans); color: var(--dim); will-change: transform;
+  .w { position: absolute; white-space: nowrap; font: 500 12px/1 var(--f-sans); color: var(--dim); will-change: transform;
     animation: float var(--t, 8s) ease-in-out infinite alternate; }
-  .w.m { font-size: 17px; color: var(--ink); }
-  .w.l { font-size: clamp(20px, 5.6vw, 34px); font-weight: 700; font-stretch: 108%; color: var(--ink); letter-spacing: -.01em; }
+  .w.m { font-size: 14px; color: var(--ink); }
+  .w.l { font-size: clamp(17px, 4.6vw, 24px); font-weight: 700; font-stretch: 108%; color: var(--ink); letter-spacing: -.01em; }
   .w.g { color: var(--green); }
   @keyframes float { from { transform: translate(calc(var(--dx) * -1), calc(var(--dy) * -1)); } to { transform: translate(var(--dx), var(--dy)); } }
   @media (min-width: 900px) { .words { width: min(100vw, 1100px); margin-left: auto; margin-right: auto; height: 380px; } }
@@ -222,24 +221,23 @@
         <h2 class="display">Kad ir kas negerai, <em>sutaisome</em></h2>
       </div>
       <div class="words reveal" aria-label="Gedimai, kuriuos taisome">
-        <div class="core tone-green spin" style="--spin:24s" data-part="gear:14"></div>
-        <span class="w s" style="left:4%;top:0%;--dx:4px;--dy:-5px;--t:7.0s">Dūzgia ant tuščios</span>
-        <span class="w m" style="right:4%;top:1%;--dx:-6px;--dy:4px;--t:8.4s">Iššoka pavara</span>
-        <span class="w l" style="left:3%;top:11%;--dx:5px;--dy:-3px;--t:9.8s">Traška jungiant</span>
-        <span class="w s" style="right:3%;top:13%;--dx:-3px;--dy:6px;--t:11.2s">Ūžia guolis</span>
-        <span class="w l g" style="left:22%;top:24%;--dx:7px;--dy:-4px;--t:12.6s">Nejunga pavara</span>
-        <span class="w m" style="left:2%;top:36%;--dx:4px;--dy:-5px;--t:7.0s">Teka tepalas</span>
-        <span class="w m" style="right:2%;top:37%;--dx:-6px;--dy:4px;--t:8.4s">Kietas pedalas</span>
-        <span class="w s" style="left:4%;top:48%;--dx:5px;--dy:-3px;--t:9.8s">Slysta sankaba</span>
-        <span class="w s" style="right:4%;top:49%;--dx:-3px;--dy:6px;--t:11.2s">Ūžia greitėjant</span>
-        <span class="w s" style="left:3%;top:63%;--dx:7px;--dy:-4px;--t:12.6s">Barška stovint</span>
-        <span class="w l" style="right:3%;top:64%;--dx:4px;--dy:-5px;--t:7.0s">Kaukia važiuojant</span>
-        <span class="w m" style="left:8%;top:72%;--dx:-6px;--dy:4px;--t:8.4s">Vibruoja svirtis</span>
-        <span class="w s" style="right:6%;top:73%;--dx:5px;--dy:-3px;--t:9.8s">Trūksta pavaros</span>
-        <span class="w m g" style="left:3%;top:82%;--dx:-3px;--dy:6px;--t:11.2s">Sunkiai jungiasi</span>
-        <span class="w s" style="right:4%;top:83%;--dx:7px;--dy:-4px;--t:12.6s">Klibėja svirtis</span>
-        <span class="w s" style="left:6%;top:93%;--dx:4px;--dy:-5px;--t:7.0s">Kvepia degėsiais</span>
-        <span class="w l" style="right:3%;top:90%;--dx:-6px;--dy:4px;--t:8.4s">Neaiškus garsas</span>
+        <span class="w l" style="left:17%;top:14%;--dx:4px;--dy:-5px;--t:7.0s">Kaukia važiuojant</span>
+        <span class="w l" style="left:31%;top:33%;--dx:-6px;--dy:4px;--t:8.4s">Traška jungiant</span>
+        <span class="w l" style="left:5%;top:46%;--dx:5px;--dy:-3px;--t:9.8s">Neaiškus garsas</span>
+        <span class="w l g" style="left:26%;top:74%;--dx:-3px;--dy:6px;--t:11.2s">Nejunga pavara</span>
+        <span class="w m" style="left:40%;top:86%;--dx:7px;--dy:-4px;--t:12.6s">Vibruoja svirtis</span>
+        <span class="w m g" style="left:61%;top:4%;--dx:4px;--dy:-5px;--t:7.0s">Sunkiai jungiasi</span>
+        <span class="w s" style="left:51%;top:64%;--dx:-6px;--dy:4px;--t:8.4s">Dūzgia ant tuščios</span>
+        <span class="w m" style="left:4%;top:61%;--dx:5px;--dy:-3px;--t:9.8s">Kietas pedalas</span>
+        <span class="w s" style="left:51%;top:53%;--dx:-3px;--dy:6px;--t:11.2s">Kvepia degėsiais</span>
+        <span class="w m" style="left:41%;top:24%;--dx:7px;--dy:-4px;--t:12.6s">Iššoka pavara</span>
+        <span class="w s" style="left:24%;top:5%;--dx:4px;--dy:-5px;--t:7.0s">Ūžia greitėjant</span>
+        <span class="w s" style="left:3%;top:87%;--dx:-6px;--dy:4px;--t:8.4s">Trūksta pavaros</span>
+        <span class="w s" style="left:58%;top:44%;--dx:5px;--dy:-3px;--t:9.8s">Klibėja svirtis</span>
+        <span class="w m" style="left:70%;top:76%;--dx:-3px;--dy:6px;--t:11.2s">Teka tepalas</span>
+        <span class="w s" style="left:9%;top:24%;--dx:7px;--dy:-4px;--t:12.6s">Slysta sankaba</span>
+        <span class="w s" style="left:2%;top:35%;--dx:4px;--dy:-5px;--t:7.0s">Barška stovint</span>
+        <span class="w s" style="left:74%;top:14%;--dx:-6px;--dy:4px;--t:8.4s">Ūžia guolis</span>
       </div>
       <p class="fix-line reveal">Nereikia žinoti, kaip vadinasi gedimas. Atveškite automobilį: išklausysime, surasime priežastį ir sutaisysime. Atliktiems darbams suteikiame garantiją.</p>
       <div class="reveal" style="text-align:center;margin-top:26px"><a class="btn btn-ink" href="tel:+37069931163">Aprašykite gedimą telefonu <span class="arr" aria-hidden="true">→</span></a></div>
