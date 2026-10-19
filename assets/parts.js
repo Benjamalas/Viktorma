@@ -192,6 +192,21 @@
       '<circle cx="35" cy="22" r="18" fill="var(--pa, var(--pf))"' + S + '/>' +
       '<path d="M27,15V29M35,15V29M43,15V29M27,22H43" stroke="var(--pf)" stroke-width="1.6" stroke-linecap="round"/>');
   };
+  // Worn gear for before/after: chipped and broken teeth, cracks, rust.
+  P.worn = function (o) {
+    o = o || {}; var n = o.n || 22, R = 48, d = 5, p = TAU / n, r = R - d, s = '';
+    var broken = { 2: 1, 3: 1, 9: 1, 15: 1 };
+    for (var i = 0; i < n; i++) {
+      var a = i * p, t = broken[i] ? r + 1.2 + (i % 2) : R - (i * 37 % 5) * .35;
+      var q = [[r, a], [t, a + .2 * p], [t - (broken[i] ? .8 : 0), a + .45 * p], [r, a + .65 * p]];
+      s += (i ? 'L' : 'M') + q.map(function (v) { return pt(v[0], v[1]); }).join('L');
+    }
+    var rust = '';
+    [[-20, -18, 7], [16, 22, 9], [26, -8, 5], [-28, 14, 6], [4, -32, 4]].forEach(function (c) { rust += '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="' + c[2] + '" fill="#8a4b1f" opacity=".38"/>'; });
+    return svg('-50 -50 100 100', '<path fill="var(--pf)" fill-rule="evenodd"' + S + ' d="' + s + 'Z' + ring(10) + holes(5, 27, 6) + '"/>' + rust +
+      '<path d="M9,4 L16,9 L19,7 L27,15 L31,14 M-6,9 L-10,17 L-8,22 L-14,30" fill="none" stroke="var(--ps)" stroke-width="1.1" stroke-linecap="round"/>' +
+      '<circle r="4" fill="var(--ph)"/>');
+  };
   var ROUND = { gear: 1, cutaway: 1, sprocket: 1, clutch: 1, bearing: 1, bellhousing: 1, seal: 1, pressure: 1, flywheel: 1 };
 
   // Floating field: <div class="field" data-field="gear:18,8,12,90,1,steel;..."> type:n?,x%,y%,size,depth,tone[,spin s]

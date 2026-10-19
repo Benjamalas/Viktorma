@@ -93,19 +93,32 @@
   .section-head { display: grid; gap: 12px; margin-bottom: 36px; }
   .section-head h2 { font-size: clamp(34px, 9vw, 60px); }
   .services { display: grid; gap: 12px; grid-template-columns: 1fr; }
-  .card { position: relative; overflow: hidden; background: var(--steel-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 12px 24px; }
-  .card h3 { margin: 18px 12px 6px; font: 700 21px/1.15 var(--f-sans); font-stretch: 108%; letter-spacing: -.01em; }
-  .card p { margin: 0 12px; color: var(--dim); font-size: 15.5px; }
+  .fix h2 { max-width: 12ch; }
+  .fix { overflow: hidden; }
+  .cloud { position: relative; width: min(100%, 540px); aspect-ratio: 1 / 1.05; margin: 10px auto 0; }
+  .cloud::before { content: ''; position: absolute; left: 50%; top: 50%; width: 62%; aspect-ratio: 1; transform: translate(-50%, -50%); border: 1px dashed var(--line); border-radius: 50%; }
+  .cloud .core { position: absolute; left: 50%; top: 50%; width: 26%; transform: translate(-50%, -50%); }
+  .sym { position: absolute; white-space: nowrap; font: 600 13px/1 var(--f-sans); padding: 10px 14px; border-radius: 999px; background: var(--steel-2); border: 1px solid var(--line);
+    box-shadow: 0 6px 16px rgba(18, 20, 23, .08); animation: drift var(--bob, 6s) ease-in-out infinite alternate; }
+  .sym.k { background: var(--ink); color: var(--steel-2); border-color: var(--ink); }
+  @keyframes drift { from { transform: translateY(-5px) rotate(var(--tilt, 0deg)); } to { transform: translateY(5px) rotate(calc(var(--tilt, 0deg) * -1)); } }
+  .fix-line { max-width: 40ch; margin: 18px auto 0; text-align: center; color: var(--dim); }
+  .ba-block { margin-top: 110px; }
+  .ba { position: relative; border-radius: 16px; overflow: hidden; user-select: none; touch-action: pan-y; }
+  .ba .art { border-radius: 0; aspect-ratio: 4 / 3; }
+  .ba .before { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--x)) 0 0); filter: sepia(.55) saturate(1.3) brightness(.92) contrast(1.05); }
+  .ba .rust { position: absolute; fill: #8a4b1f; fill-opacity: .4; }
+  .ba-lab { position: absolute; top: 12px; z-index: 3; font: 600 10px/1 var(--f-mono); letter-spacing: .16em; text-transform: uppercase; background: var(--ink); color: var(--steel-2); padding: 6px 8px; border-radius: 4px; }
+  .ba-lab.l { left: 12px; } .ba-lab.r { right: 12px; background: var(--green); }
+  .ba-handle { position: absolute; z-index: 3; top: 0; bottom: 0; left: var(--x); width: 2px; margin-left: -1px; background: var(--ink); pointer-events: none; }
+  .ba-handle b { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 46px; height: 46px; border-radius: 50%; background: var(--ink); color: var(--steel-2); display: grid; place-items: center; font: 600 15px/1 var(--f-sans); box-shadow: 0 8px 20px rgba(18, 20, 23, .25); }
+  .ba input { position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+  .ba:has(input:focus-visible) .ba-handle b { outline: 2px solid var(--green-2); outline-offset: 3px; }
   .art { position: relative; aspect-ratio: 16 / 10; border-radius: 12px; overflow: hidden; background: var(--steel);
     background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 22px 22px; background-position: -1px -1px; }
   .art > div { position: absolute; }
   .art .waves { position: absolute; }
   .chip { position: absolute; z-index: 2; font: 600 9.5px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; background: var(--ink); color: var(--steel-2); padding: 5px 7px; border-radius: 4px; }
-  .card-ink { background: var(--ink); color: var(--steel-2); border-color: var(--ink); }
-  .card-ink .art { background-color: var(--ink-2); background-image: linear-gradient(#262b32 1px, transparent 1px), linear-gradient(90deg, #262b32 1px, transparent 1px); }
-  .card-ink .chip { background: #5fd39a; color: var(--ink); }
-  .card-ink p { color: #9aa3ad; }
-  .card-ink a { display: inline-block; margin: 14px 12px 0; color: #5fd39a; font-weight: 600; text-decoration: none; }
   .pgroup { margin-bottom: 34px; }
   .pgroup h3 { font: 600 11px/1 var(--f-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--dim); margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
   .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -231,69 +244,48 @@
     </div>
   </section>
 
-  <section class="section" id="paslaugos">
+  <section class="section fix" id="paslaugos">
     <div class="field" data-field="gear:22,84,4,120,1,line;bearing,-8,58,110,1.6,line;pressure,88,88,90,1.3,line;plug,6,30,34,2.2,line"></div>
     <div class="wrap" style="position:relative;z-index:1">
-      <div class="section-head reveal">
-        <p class="eyebrow">Paslaugos</p>
-        <h2 class="display">Ką galime padaryti jūsų dėžei</h2>
+      <div class="section-head reveal" style="text-align:center;justify-items:center">
+        <p class="eyebrow">Mechaninės pavarų dėžės</p>
+        <h2 class="display">Kad ir kas negerai, <em>sutaisome</em></h2>
       </div>
-      <div class="services">
-        <div class="card reveal">
-          <div class="art">
-            <div class="tone-steel rock" style="left:6%;top:14%;width:62%" data-part="gearbox"></div>
-            <div class="tone-green spin" style="right:6%;top:8%;width:26%;--spin:14s" data-part="gear:16"></div>
-            <div class="tone-white rock" style="left:30%;bottom:6%;width:64%;--bob:9s" data-part="inputshaft"></div>
-            <span class="chip" style="left:6%;bottom:10%">Korpusas</span><span class="chip" style="right:6%;top:52%">Velenai</span>
-          </div>
-          <h3>Kapitalinis remontas</h3><p>Ardome, matuojame ir atstatome pavarų dėžę iki gamyklinių parametrų su kokybiškais remkomplektais.</p>
+      <div class="cloud reveal" aria-label="Gedimai, kuriuos taisome">
+        <div class="core tone-green spin" style="--spin:24s" data-part="gear:16"></div>
+        <span class="sym" style="left:3%;top:4%;--bob:5.0s;--tilt:-3deg">Traška jungiant</span>
+        <span class="sym" style="right:4%;top:9%;--bob:6.3s;--tilt:2deg">Ūžia guolis</span>
+        <span class="sym k" style="left:27%;top:19%;--bob:7.6s;--tilt:-1deg">Nejunga pavara</span>
+        <span class="sym" style="left:0;top:35%;--bob:8.9s;--tilt:3deg">Teka tepalas</span>
+        <span class="sym" style="right:0;top:33%;--bob:5.0s;--tilt:-2deg">Iššoka pavara</span>
+        <span class="sym k" style="left:3%;top:62%;--bob:6.3s;--tilt:-3deg">Kietas pedalas</span>
+        <span class="sym" style="right:2%;top:60%;--bob:7.6s;--tilt:2deg">Slysta sankaba</span>
+        <span class="sym" style="left:22%;top:76%;--bob:8.9s;--tilt:-1deg">Kaukia važiuojant</span>
+        <span class="sym" style="left:0;top:91%;--bob:5.0s;--tilt:3deg">Vibruoja svirtis</span>
+        <span class="sym k" style="right:3%;top:89%;--bob:6.3s;--tilt:-2deg">Neaiškus garsas</span>
+      </div>
+      <p class="fix-line reveal">Nereikia žinoti, kaip vadinasi gedimas. Atveškite automobilį: išklausysime, surasime priežastį ir sutaisysime. Visų markių mechanines dėžes, su garantija.</p>
+      <div class="reveal" style="text-align:center;margin-top:26px"><a class="btn btn-ink" href="tel:+37069931163">Aprašykite gedimą telefonu <span class="arr" aria-hidden="true">→</span></a></div>
+
+      <div class="ba-block">
+        <div class="section-head reveal">
+          <p class="eyebrow">Prieš ir po</p>
+          <h2 class="display">Bet koks gedimas. Vienas servisas.</h2>
+          <p class="lead">Patraukite liniją ir pažiūrėkite, ką su dalimis padaro remontas.</p>
         </div>
-        <div class="card reveal" data-delay="1">
-          <div class="art">
-            <div class="tone-white spin" style="left:6%;top:12%;width:44%;--spin:12s" data-part="bearing"></div>
-            <svg class="waves" style="left:48%;top:18%;width:16%" viewBox="0 0 60 100"><path d="M20,30 Q32,50 20,70"/><path d="M30,20 Q48,50 30,80"/><path d="M40,10 Q64,50 40,90"/></svg>
-            <div class="tone-steel rock" style="right:4%;bottom:10%;width:60%" data-part="outputshaft"></div>
-            <span class="chip" style="left:6%;bottom:8%">Guoliai</span><span class="chip" style="right:6%;top:10%">Antrinis velenas</span>
+        <div class="ba reveal" id="ba" style="--x:50%">
+          <div class="art after">
+            <div class="tone-steel spin" style="left:6%;top:10%;width:52%;--spin:30s" data-part="gear:22"></div>
+            <div class="tone-white spin" style="right:6%;top:24%;width:34%;--spin:14s;--dir:reverse" data-part="bearing"></div>
           </div>
-          <h3>Gedimų diagnostika</h3><p>Pagal garsą ir eigą nustatome, kuris guolis ar velenas kaltas, dar prieš remontą. Kainą žinote iš anksto.</p>
-        </div>
-        <div class="card reveal" data-delay="2">
-          <div class="art">
-            <div class="tone-steel rock" style="left:8%;top:14%;width:20%" data-part="plug"></div>
-            <div class="tone-brass rock" style="left:32%;top:12%;width:38%;--bob:8s" data-part="gasket"></div>
-            <div class="tone-steel spin" style="right:5%;top:30%;width:30%;--spin:18s" data-part="seal"></div>
-            <span class="chip" style="left:6%;bottom:8%">Kamščiai</span><span class="chip" style="left:38%;bottom:8%">Tarpinės</span><span class="chip" style="right:5%;top:10%">Riebokšliai</span>
+          <div class="art before" aria-hidden="true">
+            <div class="tone-steel" style="left:6%;top:10%;width:52%" data-part="worn:22"></div>
+            <div class="tone-white" style="right:6%;top:24%;width:34%" data-part="bearing"></div>
+            <svg class="rust" style="right:6%;top:24%;width:34%" viewBox="-50 -50 100 100"><circle cx="-24" cy="10" r="9"/><circle cx="18" cy="-26" r="7"/><circle cx="30" cy="20" r="6"/><path d="M-6,-40 L0,-30 L-4,-22" fill="none" stroke="#121417" stroke-width="1.2"/></svg>
           </div>
-          <h3>Tepalų ir filtrų keitimas</h3><p>Keičiame tepalą, kamščių tarpines ir pratekančius riebokšlius. Tai pailgina dėžės tarnavimą ir apsaugo nuo brangaus remonto.</p>
-        </div>
-        <div class="card reveal">
-          <div class="art">
-            <div class="tone-steel spin" style="left:4%;top:12%;width:46%;--spin:22s" data-part="flywheel"></div>
-            <div class="tone-green spin" style="left:30%;top:20%;width:38%;--spin:16s;--dir:reverse" data-part="clutch"></div>
-            <div class="tone-white spin" style="right:4%;top:12%;width:34%;--spin:26s" data-part="pressure"></div>
-            <span class="chip" style="left:5%;bottom:8%">Smagratis</span><span class="chip" style="left:40%;bottom:8%">Diskas</span><span class="chip" style="right:4%;bottom:20%">Krepšys</span>
-          </div>
-          <h3>Montavimas ir sankaba</h3><p>Perdarome automatinę į mechaninę ir keičiame visą sankabos komplektą: smagratį, diską ir krepšį.</p>
-        </div>
-        <div class="card reveal" data-delay="1">
-          <div class="art">
-            <div class="tone-green rock" style="left:8%;top:8%;width:18%" data-part="lever"></div>
-            <div class="tone-steel rock" style="left:32%;top:16%;width:34%;--bob:9s" data-part="fork"></div>
-            <div class="tone-white spin" style="right:4%;top:22%;width:30%;--spin:20s" data-part="cutaway:22"></div>
-            <span class="chip" style="left:6%;bottom:8%">Svirtis</span><span class="chip" style="left:36%;bottom:8%">Šakutės</span>
-          </div>
-          <h3>Trumpesnės eigos svirtys</h3><p>Short-shifter sistemos ir naujos perjungimo šakutės aiškesniam, tikslesniam pavarų jungimui.</p>
-        </div>
-        <div class="card card-ink reveal" data-delay="2">
-          <div class="art">
-            <div class="tone-night rock" style="left:6%;top:10%;width:22%" data-part="pedal"></div>
-            <div class="tone-night rock" style="left:32%;top:10%;width:44%;--bob:8s" data-part="master"></div>
-            <div class="tone-night rock" style="right:4%;bottom:12%;width:42%;--bob:9s" data-part="slave"></div>
-            <div class="tone-night rock" style="left:20%;bottom:6%;width:42%" data-part="cable"></div>
-            <span class="chip" style="left:6%;bottom:8%">Pedalas</span><span class="chip" style="right:4%;top:8%">Cilindrai</span>
-          </div>
-          <h3>Pedalas kietas ar pavara nejunga?</h3><p>Patikriname sankabos trosą, pagrindinį ir darbinį cilindrus. Atveškite automobilį, meistras pravažiuos ir nustatys gedimą.</p>
-          <a href="tel:+37069931163">Užsakyti diagnostiką →</a>
+          <span class="ba-lab l">Prieš</span><span class="ba-lab r">Po</span>
+          <div class="ba-handle" aria-hidden="true"><b>‹ ›</b></div>
+          <input type="range" id="ba-range" min="0" max="100" value="50" aria-label="Palyginti prieš ir po remonto">
         </div>
       </div>
     </div>
@@ -474,6 +466,22 @@
       if (!reduce && scrollY < innerHeight * 1.2) requestAnimationFrame(frame); else if (!reduce) setTimeout(function () { requestAnimationFrame(frame); }, 300);
     }
     requestAnimationFrame(frame);
+  })();
+  // Before/after slider; nudges once when first seen so people notice it moves.
+  (function () {
+    var ba = document.getElementById('ba'), r = document.getElementById('ba-range');
+    var set = function (v) { ba.style.setProperty('--x', v + '%'); };
+    r.addEventListener('input', function () { set(r.value); });
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var io = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return; io.disconnect();
+      var t0 = performance.now();
+      (function step(t) {
+        var k = Math.min(1, (t - t0) / 2200), v = 50 + Math.sin(k * Math.PI * 2) * 28;
+        set(v); r.value = v; if (k < 1) requestAnimationFrame(step);
+      })(t0);
+    }, { threshold: .6 });
+    io.observe(ba);
   })();
 </script>
 </body>
