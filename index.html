@@ -44,10 +44,6 @@
     transition: opacity .8s var(--ease), transform 1.1s var(--ease); display: grid; place-items: center; }
   .stage[data-step="1"] .s1, .stage[data-step="2"] .s2, .stage[data-step="3"] .s3 { opacity: 1; transform: translateX(-50%); }
   .s1 .box { width: 92%; }
-  .waves { position: absolute; left: -4%; top: 22%; width: 40%; }
-  .waves path { fill: none; stroke: var(--green); stroke-width: 2; stroke-linecap: round; opacity: 0; animation: wave 2.4s ease-out infinite; transform-origin: 0 50%; }
-  .waves path:nth-child(2) { animation-delay: .4s; } .waves path:nth-child(3) { animation-delay: .8s; }
-  @keyframes wave { 0% { opacity: 0; transform: scale(.6); } 30% { opacity: 1; } 100% { opacity: 0; transform: scale(1.15); } }
   .callout { position: absolute; font: 600 10px/1.3 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; color: var(--ink); }
   .callout::before { content: ''; width: 26px; height: 1px; background: var(--ink); }
   .s2 .cut { position: absolute; width: 62%; opacity: .9; }
@@ -95,16 +91,15 @@
   .services { display: grid; gap: 12px; grid-template-columns: 1fr; }
   .fix h2 { max-width: 12ch; }
   .fix { overflow: hidden; }
-  .words { position: relative; width: 100vw; margin: 0 0 0 calc(50% - 50vw); max-width: none; height: clamp(500px, 132vw, 600px); }
-  .words-mid { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
-  .words-mid .section-head { margin: 0; }
-  .w { position: absolute; white-space: nowrap; font: 500 12px/1 var(--f-sans); color: var(--dim); will-change: transform;
+  .words { display: grid; gap: 34px; margin-top: 8px; }
+  .words .section-head { margin: 0; text-align: center; justify-items: center; }
+  .cloud { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 24px 22px; max-width: 760px; margin: 0 auto; }
+  .w { position: relative; top: var(--y, 0); white-space: nowrap; font: 500 12px/1 var(--f-sans); color: var(--dim); will-change: transform;
     animation: float var(--t, 8s) ease-in-out infinite alternate; }
   .w.m { font-size: 14px; color: var(--ink); }
   .w.l { font-size: clamp(17px, 4.6vw, 24px); font-weight: 700; font-stretch: 108%; color: var(--ink); letter-spacing: -.01em; }
   .w.g { color: var(--green); }
   @keyframes float { from { transform: translate(calc(var(--dx) * -1), calc(var(--dy) * -1)); } to { transform: translate(var(--dx), var(--dy)); } }
-  @media (min-width: 900px) { .words { width: min(100vw, 1100px); margin-left: auto; margin-right: auto; height: 520px; } }
   .fix-line { max-width: 40ch; margin: 18px auto 0; text-align: center; color: var(--dim); }
   .proof { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--ink); }
   .proof div { padding: 18px 10px 0 0; } .proof span { display: block; margin-top: 6px; }
@@ -146,10 +141,8 @@
     <div class="mesh" id="mesh" aria-hidden="true"></div>
     <div class="wrap">
       <p class="eyebrow">Viktorma · Marijampolė</p>
-      <h1 class="display hero-line">Jūs vairuojate. <em>Mes klausomės.</em></h1>
-      <p class="lead">Mechaninių pavarų dėžių remontas.</p>
+      <h1 class="display hero-line">Mechaninių pavarų dėžių <em>remontas</em></h1>
     </div>
-    <div class="scroll-cue">Slinkite<i></i></div>
   </section>
 
   <section class="story" aria-label="Viktorma istorija">
@@ -157,14 +150,10 @@
       <div class="steps"><i></i><i></i><i></i></div>
       <div class="scene s1">
         <div class="box tone-steel" data-part="gearbox"></div>
-        <svg class="waves" viewBox="0 0 60 100"><path d="M20,30 Q32,50 20,70"/><path d="M30,20 Q48,50 30,80"/><path d="M40,10 Q64,50 40,90"/></svg>
-        <span class="callout" style="right:2%;top:12%">Traška?</span>
-        <span class="callout" style="left:30%;bottom:16%">Ūžia?</span>
       </div>
       <div class="scene s2">
         <div class="cut tone-white spin" style="--spin:40s" data-part="cutaway:28"></div>
         <div class="sh tone-steel" data-part="shaft"></div>
-        <span class="callout" style="left:0;top:8%">Tikriname kiekvieną detalę</span>
       </div>
       <div class="scene s3">
         <div class="cl tone-steel spin" style="--spin:30s" data-part="clutch"></div>
@@ -180,23 +169,23 @@
 
     <article class="chapter" data-step="1">
       <div class="wrap"><div class="reveal">
-        <span class="num">01 / 03 · Išgirsti</span>
-        <h2 class="display">Garsas, kurį girdite kasdien</h2>
-        <p>Traškesys perjungiant, ūžimas greitėjant. Jums tai įprastas triukšmas, mums užuomina. Meistras pravažiuoja ir pasako, kur bėda, dar prieš ardydamas dėžę.</p>
+        <span class="num">01 / 03 · Gedimas</span>
+        <h2 class="display">Pavarų dėžė sugedo</h2>
+        <p>Nejunga pavara, slysta sankaba ar dėžė tiesiog nebeveikia taip, kaip turėtų. Nesvarbu, kas tiksliai nutiko.</p>
       </div></div>
     </article>
     <article class="chapter" data-step="2">
       <div class="wrap"><div class="reveal">
-        <span class="num">02 / 03 · Atverti</span>
-        <h2 class="display">Atidarome ir nespėliojame</h2>
-        <p>Išardome, apžiūrime kiekvieną krumpliaratį, guolį ir veleną. Keičiame tai, kas susidėvėjo. Visą darbą atliekame patys, savo dirbtuvėje.</p>
+        <span class="num">02 / 03 · Viktorma</span>
+        <h2 class="display">Atvežate ją mums</h2>
+        <p>Nustatome gedimą, išardome dėžę ir sutaisome tai, kas sugedo.</p>
       </div></div>
     </article>
     <article class="chapter" data-step="3">
       <div class="wrap"><div class="reveal">
-        <span class="num">03 / 03 · Grąžinti</span>
-        <h2 class="display">Ir vėl tylu</h2>
-        <p>Pavaros jungiasi lengvai, svirtis neklibėja, kelyje girdite tik variklį. Atliktiems darbams suteikiame garantiją.</p>
+        <span class="num">03 / 03 · Sutaisyta</span>
+        <h2 class="display">Ir važiuojate toliau</h2>
+        <p>Dėžė vėl veikia, o atliktiems darbams suteikiame garantiją.</p>
       </div></div>
     </article>
   </section>
@@ -206,42 +195,34 @@
     <div class="field" data-field="gear:22,84,4,120,1,line;bearing,-8,58,110,1.6,line;pressure,88,88,90,1.3,line;plug,6,30,34,2.2,line"></div>
     <div class="wrap" style="position:relative;z-index:1">
       <div class="words" aria-label="Gedimai, kuriuos taisome">
-        <div class="words-mid">
-          <div class="section-head reveal" style="text-align:center;justify-items:center">
-            <p class="eyebrow">Skamba pažįstamai?</p>
-            <h2 class="display">Kad ir kas tai būtų, <em>sutaisome</em></h2>
-          </div>
+        <div class="cloud">
+          <span class="w m" style="--y:6px;--dx:4px;--dy:-5px;--t:7.0s">Iššoka pavara</span>
+          <span class="w s" style="--y:0px;--dx:-6px;--dy:4px;--t:8.4s">Teka tepalas</span>
+          <span class="w l" style="--y:0px;--dx:5px;--dy:-3px;--t:9.8s">Nejunga pavara</span>
+          <span class="w s" style="--y:6px;--dx:-3px;--dy:6px;--t:11.2s">Klibėja svirtis</span>
+          <span class="w m g" style="--y:-6px;--dx:7px;--dy:-4px;--t:12.6s">Slysta sankaba</span>
+          <span class="w s" style="--y:3px;--dx:4px;--dy:-5px;--t:7.0s">Kietas pedalas</span>
+          <span class="w l" style="--y:-3px;--dx:-6px;--dy:4px;--t:8.4s">Sunkiai jungiasi</span>
+          <span class="w s" style="--y:-6px;--dx:5px;--dy:-3px;--t:9.8s">Trūksta pavaros</span>
+          <span class="w m" style="--y:-3px;--dx:-3px;--dy:6px;--t:11.2s">Sugedęs guolis</span>
         </div>
-        <span class="w l" style="left:42%;top:71%;--dx:4px;--dy:-5px;--t:7.0s">Kaukia važiuojant</span>
-        <span class="w l" style="left:24%;top:24%;--dx:-6px;--dy:4px;--t:8.4s">Traška jungiant</span>
-        <span class="w l" style="left:50%;top:92%;--dx:5px;--dy:-3px;--t:9.8s">Neaiškus garsas</span>
-        <span class="w l g" style="left:47%;top:84%;--dx:-3px;--dy:6px;--t:11.2s">Nejunga pavara</span>
-        <span class="w m" style="left:30%;top:9%;--dx:7px;--dy:-4px;--t:12.6s">Vibruoja svirtis</span>
-        <span class="w m g" style="left:35%;top:1%;--dx:4px;--dy:-5px;--t:7.0s">Sunkiai jungiasi</span>
-        <span class="w s" style="left:13%;top:18%;--dx:-6px;--dy:4px;--t:8.4s">Dūzgia ant tuščios</span>
-        <span class="w m" style="left:53%;top:31%;--dx:5px;--dy:-3px;--t:9.8s">Kietas pedalas</span>
-        <span class="w s" style="left:64%;top:17%;--dx:-3px;--dy:6px;--t:11.2s">Kvepia degėsiais</span>
-        <span class="w m" style="left:8%;top:93%;--dx:7px;--dy:-4px;--t:12.6s">Iššoka pavara</span>
-        <span class="w s" style="left:15%;top:34%;--dx:4px;--dy:-5px;--t:7.0s">Ūžia greitėjant</span>
-        <span class="w s" style="left:8%;top:81%;--dx:-6px;--dy:4px;--t:8.4s">Trūksta pavaros</span>
-        <span class="w s" style="left:3%;top:4%;--dx:5px;--dy:-3px;--t:9.8s">Klibėja svirtis</span>
-        <span class="w m" style="left:69%;top:10%;--dx:-3px;--dy:6px;--t:11.2s">Teka tepalas</span>
-        <span class="w s" style="left:8%;top:72%;--dx:7px;--dy:-4px;--t:12.6s">Slysta sankaba</span>
-        <span class="w s" style="left:50%;top:78%;--dx:4px;--dy:-5px;--t:7.0s">Barška stovint</span>
-        <span class="w s" style="left:5%;top:87%;--dx:-6px;--dy:4px;--t:8.4s">Ūžia guolis</span>
+        <div class="section-head reveal">
+          <h2 class="display">Kad ir kas sugedo, <em>sutaisome</em></h2>
+        </div>
+        <div class="cloud">
+          <span class="w s" style="--y:-6px;--dx:5px;--dy:-3px;--t:9.8s">Neįsijungia atbulinė</span>
+          <span class="w l g" style="--y:0px;--dx:-3px;--dy:6px;--t:11.2s">Lūžęs krumpliaratis</span>
+          <span class="w m" style="--y:3px;--dx:7px;--dy:-4px;--t:12.6s">Kvepia degėsiais</span>
+          <span class="w s" style="--y:-3px;--dx:4px;--dy:-5px;--t:7.0s">Strigusi svirtis</span>
+          <span class="w m" style="--y:3px;--dx:-6px;--dy:4px;--t:8.4s">Nusidėvėję sinchronai</span>
+          <span class="w l" style="--y:6px;--dx:5px;--dy:-3px;--t:9.8s">Sankabos gedimas</span>
+          <span class="w s" style="--y:-6px;--dx:-3px;--dy:6px;--t:11.2s">Pratekėjęs riebokšlis</span>
+          <span class="w m" style="--y:6px;--dx:7px;--dy:-4px;--t:12.6s">Vibruoja svirtis</span>
+        </div>
       </div>
-      <p class="fix-line reveal">Nebūtina žinoti, kaip vadinasi gedimas. Užtenka papasakoti, ką girdite ir jaučiate. Toliau tai mūsų darbas.</p>
+      <p class="fix-line reveal">Nebūtina žinoti, kaip vadinasi gedimas. Užtenka papasakoti, kas negerai, o toliau tai mūsų darbas.</p>
       <div class="reveal" style="text-align:center;margin-top:26px"><a class="btn btn-ink" href="tel:+37069931163">Papasakokite telefonu <span class="arr" aria-hidden="true">→</span></a></div>
 
-    </div>
-  </section>
-
-  <section class="section" id="kodel" style="padding-top:24px">
-    <div class="wrap">
-      <div class="proof reveal">
-        <div><b>Patys</b><span>visą darbą atliekame savo dirbtuvėje</span></div>
-        <div><b>Garantija</b><span>kiekvienam atliktam darbui</span></div>
-      </div>
     </div>
   </section>
 
@@ -249,7 +230,7 @@
     <div class="field" data-field="gear:30,62,8,260,.6,nightline;cutaway:20,-12,60,180,1.2,night;sprocket:16,78,70,110,1.8,night;bearing,40,90,70,2.4,nightline;pressure,84,30,80,1.4,nightline;lever,8,16,40,2,nightline"></div>
     <div class="wrap reveal">
       <p class="eyebrow">Registracija</p>
-      <h2 class="display">Grąžinkime jūsų dėžei <em>tylą</em></h2>
+      <h2 class="display">Sutaisykime jūsų <em>pavarų dėžę</em></h2>
       <p class="lead">Paskambinkite ir susitarsime laiką. Meistras patikrins automobilį, pasakys, kas negerai ir kiek kainuos, ir tik tada imsimės darbo.</p>
       <div class="cta-actions">
         <a class="btn btn-green" href="tel:+37069931163">Registruotis remontui <span class="arr" aria-hidden="true">→</span></a>
