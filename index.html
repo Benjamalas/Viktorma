@@ -1,177 +1,370 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="lt">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Viktorma · Mechaninių pavarų dėžių servisas Marijampolėje</title>
+<meta name="description" content="Mechaninių pavarų dėžių diagnostika, kapitalinis remontas ir tepalų keitimas Marijampolėje. Be tarpininkų, su garantija.">
+<meta name="theme-color" content="#eceef1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  /* Header */
+  .top { position: fixed; inset: 0 0 auto; z-index: 50; display: flex; align-items: center; justify-content: space-between;
+    padding: calc(12px + env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) 12px var(--gutter);
+    opacity: 0; transition: opacity .8s var(--ease) .4s, background .4s, box-shadow .4s; }
+  .ready .top { opacity: 1; }
+  .top.solid { background: rgba(236, 238, 241, .86); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--line); }
+  .logo { font: 400 19px/1 var(--f-sans); font-stretch: 125%; letter-spacing: .16em; text-decoration: none; }
+  .top-call { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; background: var(--ink); color: var(--steel-2); font: 600 13px/1 var(--f-sans); text-decoration: none; }
+  .top-call svg { width: 14px; height: 14px; fill: currentColor; }
+
+  /* Hero: quiet screen, one line, two meshing gears turning at the edge */
+  .hero { position: relative; min-height: 100svh; overflow: hidden; display: grid; align-content: center; }
+  .hero .wrap { position: relative; z-index: 2; }
+  .hero-line { font-size: clamp(34px, 10vw, 84px); max-width: 11ch; margin-top: 16px; }
+  .hero .lead { margin-top: 18px; }
+  .ready .hero .wrap > * { animation: rise 1.2s var(--ease) both; }
+  .ready .hero .wrap > :nth-child(2) { animation-delay: .15s; }
+  .ready .hero .wrap > :nth-child(3) { animation-delay: .3s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+  .mesh { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .mesh > div { position: absolute; }
+  .scroll-cue { position: absolute; z-index: 2; left: var(--gutter); bottom: calc(26px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 12px;
+    font: 600 10px/1 var(--f-mono); letter-spacing: .28em; text-transform: uppercase; color: var(--dim); }
+  .scroll-cue i { width: 40px; height: 1px; background: var(--ink); transform-origin: left; animation: cue 2.2s var(--ease) infinite; }
+  @keyframes cue { 0% { transform: scaleX(0); } 60% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+
+  /* Story: sticky stage with three illustrated scenes, chapters scroll over it */
+  .story { position: relative; }
+  .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; pointer-events: none; }
+  .scene { position: absolute; left: 50%; top: 13svh; width: min(84vw, 520px); aspect-ratio: 1; max-width: 100%; transform: translateX(-50%) scale(.86) rotate(-6deg); opacity: 0;
+    transition: opacity .8s var(--ease), transform 1.1s var(--ease); display: grid; place-items: center; }
+  .stage[data-step="1"] .s1, .stage[data-step="2"] .s2, .stage[data-step="3"] .s3 { opacity: 1; transform: translateX(-50%); }
+  .s1 .box { width: 92%; }
+  .callout { position: absolute; font: 600 10px/1.3 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; color: var(--ink); }
+  .callout::before { content: ''; width: 26px; height: 1px; background: var(--ink); }
+  .s2 .cut { position: absolute; width: 62%; opacity: .9; }
+  .s2 .sh { position: absolute; width: 104%; bottom: 6%; }
+  .s2 .sh .g1, .s2 .sh .g2, .s2 .sh .g3 { transition: transform 1.4s var(--ease) .3s; }
+  .stage[data-step="2"] .sh .g1 { transform: translateX(-12px); }
+  .stage[data-step="2"] .sh .g3 { transform: translateX(14px); }
+  .s3 .cl { position: absolute; width: 62%; left: 2%; top: 14%; }
+  .s3 .br { position: absolute; width: 44%; right: 2%; bottom: 10%; }
+  .s3 .badge { position: absolute; width: 36%; right: 2%; top: 0; }
+  .badge { overflow: visible; }
+  .badge text { font: 600 8.5px var(--f-mono); letter-spacing: .12em; fill: var(--ink); }
+  .badge .core { fill: var(--green); }
+  .steps { position: absolute; left: var(--gutter); top: 50%; display: grid; gap: 8px; transform: translateY(-50%); }
+  .steps i { width: 3px; height: 22px; border-radius: 2px; background: var(--line); transition: background .4s, height .4s; }
+  .stage[data-step="1"] .steps i:nth-child(1), .stage[data-step="2"] .steps i:nth-child(2), .stage[data-step="3"] .steps i:nth-child(3) { background: var(--green); height: 40px; }
+
+  .chapter { position: relative; z-index: 2; min-height: 100svh; display: flex; align-items: flex-end; padding-bottom: 9svh; }
+  .chapter:first-of-type { margin-top: -100svh; }
+  .chapter .wrap > div { max-width: 560px; padding-top: 70px;
+    background: linear-gradient(to bottom, rgba(236, 238, 241, 0), var(--steel) 60px); }
+  .chapter .num { font: 600 11px/1 var(--f-mono); color: var(--dim); letter-spacing: .2em; }
+  .chapter h2 { font-size: clamp(36px, 10.5vw, 72px); margin: 12px 0 14px; }
+  .chapter p { margin: 0; color: var(--dim); max-width: 34ch; font-size: clamp(16px, 4.3vw, 19px); }
+  @media (min-width: 900px) {
+    .scene { left: auto; right: max(4vw, calc((100vw - var(--max)) / 2)); top: 50%; transform: translateY(-50%) scale(.86) rotate(-6deg); width: min(44vw, 560px); }
+    .stage[data-step="1"] .s1, .stage[data-step="2"] .s2, .stage[data-step="3"] .s3 { transform: translateY(-50%); }
+    .chapter { align-items: center; padding: 0; }
+    .chapter .wrap > div { background: none; padding: 0 0 0 40px; }
+    .steps { left: max(var(--gutter), calc((100vw - var(--max)) / 2)); }
+  }
+
+  /* CTA */
+  .cta { position: relative; overflow: hidden; padding: 120px 0; min-height: 88svh; display: grid; align-content: center; }
+  .cta .wrap { position: relative; z-index: 1; }
+  .cta h2 { font-size: clamp(44px, 13vw, 112px); margin: 16px 0 22px; max-width: 10ch; }
+  .cta h2 em { color: #5fd39a; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .cta-note { margin-top: 20px; font: 400 13px/1.5 var(--f-mono); color: #8d96a0; }
+
+  /* Info sections */
+  .section { position: relative; padding: 96px 0; }
+  .section-head { display: grid; gap: 12px; margin-bottom: 36px; }
+  .section-head h2 { font-size: clamp(34px, 9vw, 60px); }
+  .services { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  .fix h2 { max-width: 12ch; }
+  .fix { overflow: hidden; }
+  .words { display: grid; gap: 34px; margin-top: 8px; }
+  .words .section-head { margin: 0; text-align: center; justify-items: center; }
+  .cloud { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 24px 22px; max-width: 760px; margin: 0 auto; }
+  .w { position: relative; top: var(--y, 0); white-space: nowrap; font: 500 12px/1 var(--f-sans); color: var(--dim); will-change: transform;
+    animation: float var(--t, 8s) ease-in-out infinite alternate; }
+  .w.m { font-size: 14px; color: var(--ink); }
+  .w.l { font-size: clamp(17px, 4.6vw, 24px); font-weight: 700; font-stretch: 108%; color: var(--ink); letter-spacing: -.01em; }
+  .w.g { color: var(--green); }
+  @keyframes float { from { transform: translate(calc(var(--dx) * -1), calc(var(--dy) * -1)); } to { transform: translate(var(--dx), var(--dy)); } }
+  .fix-line { max-width: 40ch; margin: 18px auto 0; text-align: center; color: var(--dim); }
+  .proof { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--ink); }
+  .proof div { padding: 18px 10px 0 0; } .proof span { display: block; margin-top: 6px; }
+  .proof b { display: block; font: 600 clamp(26px, 7.4vw, 56px)/1 var(--f-sans); font-stretch: 75%; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .proof span { font-size: 13px; color: var(--dim); }
+
+  .shop { position: relative; overflow: hidden; border-radius: 28px; padding: 40px 26px 220px; }
+  .shop .txt { position: relative; z-index: 1; max-width: 460px; }
+  .shop h2 { font-size: clamp(34px, 9vw, 58px); margin: 14px 0 14px; }
+  .shop p { margin: 0 0 26px; }
+  @media (min-width: 860px) { .shop { padding: 64px 56px; } }
+
+  .contact { display: grid; gap: 26px; grid-template-columns: 1fr 1fr; }
+  .contact h4 { margin: 0 0 8px; font: 600 11px/1.4 var(--f-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
+  .contact p { margin: 0; }
+  .contact a { text-decoration: none; }
+  .contact a:hover { color: var(--green); }
+  .contact-actions { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
+  @media (min-width: 860px) { .contact { grid-template-columns: repeat(4, 1fr); } }
+</style>
 </head>
 <body>
-<x-dc>
-<helmet data-dc-atomics="">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;family=Barlow+Condensed:wght@500;600;700&amp;family=Barlow+Semi+Condensed:wght@500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
-<style>
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--page-bg,#f4f1ea);font-family:'Barlow',system-ui,sans-serif}
-  a{color:var(--accent,#c9a227);text-decoration:none}
-  a:hover{opacity:.82}
-</style>
-</helmet>
 
-<div style="{{ rootStyle }}">
-<div style="width:100%;color:var(--ink,#17242e);background:var(--page-bg,#f4f1ea);font-family:'Barlow',sans-serif" data-screen-label="Viktorma">
-
-  <!-- nav -->
-  <header style="display:flex;align-items:center;justify-content:space-between;padding:20px 5vw;background:var(--hero-bg,#0e1a24);border-bottom:1px solid rgba(125,148,163,.16)">
-    <div style="display:flex;align-items:center;gap:11px">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;letter-spacing:.14em;color:var(--hero-fg,#fff)">VIKTORMA</div>
-    </div>
-    <nav style="display:flex;align-items:center;gap:30px">
-      <a href="#paslaugos" style="color:var(--hero-fg,#fff);opacity:.82;font-size:14.5px;font-weight:500">Paslaugos</a>
-      <a href="#kodel" style="color:var(--hero-fg,#fff);opacity:.82;font-size:14.5px;font-weight:500">Kodėl mes</a>
-      <a href="#kontaktai" style="color:var(--hero-fg,#fff);opacity:.82;font-size:14.5px;font-weight:500">Kontaktai</a>
-      <a href="tel:+37069931163" style="background:var(--accent,#c9a227);color:var(--accent-ink,#0e1a24);font-weight:600;font-size:14px;padding:9px 18px;border-radius:var(--btn-radius,7px);white-space:nowrap">+370 699 31163</a>
-    </nav>
-  </header>
-
-  <!-- hero -->
-  <div style="background:var(--hero-bg,#0e1a24);padding:60px 5vw 68px">
-   <div style="max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center">
-    <div>
-      <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--accent,#c9a227);margin-bottom:20px">MECHANINIŲ PAVARŲ DĖŽIŲ SERVISAS · MARIJAMPOLĖ</div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:62px;line-height:1.02;margin:0 0 20px;color:var(--hero-fg,#fff);text-wrap:balance;text-transform:var(--head-tr,none);letter-spacing:var(--head-ls,normal)">Jūsų mechaninė dėžė vėl važiuos kaip nauja</h1>
-      <p style="font-size:18px;line-height:1.55;color:var(--hero-sub,#a9b6bf);margin:0 0 30px;max-width:460px">Diagnostika, kapitalinis remontas ir tepalų keitimas — viską atliekame patys, be tarpininkų. Aiškiai, greitai ir su garantija.</p>
-      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px">
-        <a href="#kontaktai" style="background:var(--accent,#c9a227);color:var(--accent-ink,#0e1a24);font-weight:700;font-size:15.5px;padding:14px 26px;border-radius:var(--btn-radius,7px);white-space:nowrap">Registruotis remontui</a>
-        <a href="tel:+37069931163" style="border:1.5px solid var(--hero-border,rgba(125,148,163,.35));color:var(--hero-fg,#fff);font-weight:600;font-size:15.5px;padding:14px 26px;border-radius:var(--btn-radius,7px);white-space:nowrap">Skambinti servisui</a>
-      </div>
-      <div style="display:flex;gap:26px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:12px;color:var(--hero-sub,#7d94a3)">
-        <span>✓ Garantija darbams</span><span>✓ Originalūs remkomplektai</span>
-      </div>
-    </div>
-    <div style="height:380px;border-radius:var(--radius,10px);background:#f4f2ee;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(125,148,163,.25)"><img src="./chatgpt-image-jul-11-2026-12_46_42-am-mrfk1mcr.png" alt="Mechaninė pavarų dėžė" style="width:100%;height:100%;object-fit:cover"></div>
-   </div>
+<div class="intro" aria-hidden="true">
+  <div class="intro-in">
+    <div class="intro-word"><span style="--i:0">V</span><span style="--i:1">I</span><span style="--i:2">K</span><span style="--i:3">T</span><span style="--i:4">O</span><span style="--i:5">R</span><span style="--i:6">M</span><span style="--i:7">A</span></div>
+    <div class="intro-gear tone-green" data-part="gear:12"></div>
   </div>
-
-  <!-- trust strip -->
-  <div style="background:var(--accent,#c9a227);padding:16px 5vw;color:var(--accent-ink,#0e1a24)">
-   <div style="max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:15px">
-    <span>Remontuojame patys — nevežame kitiems</span><span>·</span><span>Dalys pigiau per rrr.lt</span><span>·</span><span>Dirbame I–V 9:00–18:00</span>
-   </div>
-  </div>
-
-  <!-- services -->
-  <div id="paslaugos" style="padding:64px 5vw 24px">
-   <div style="max-width:1160px;margin:0 auto">
-    <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--accent,#c9a227);margin-bottom:10px">MŪSŲ PASLAUGOS</div>
-    <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:40px;margin:0 0 34px;color:var(--ink,#17242e);text-transform:var(--head-tr,none);letter-spacing:var(--head-ls,normal)">Ką galime padaryti jūsų dėžei</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px">
-      <div style="background:var(--card-bg,#fff);border:1px solid var(--card-border,#e2ddd1);border-radius:var(--radius,10px);padding:26px 24px">
-        <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent,#c9a227);margin-bottom:14px">01</div>
-        <h3 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:21px;margin:0 0 9px;color:var(--ink,#17242e);text-transform:var(--head-tr,none)">Kapitalinis remontas</h3>
-        <p style="font-size:14.5px;line-height:1.5;color:var(--muted,#5a6b76);margin:0">Ardome, matuojame ir atstatome pavarų dėžę iki gamyklinių parametrų su kokybiškais remkomplektais.</p>
-      </div>
-      <div style="background:var(--card-bg,#fff);border:1px solid var(--card-border,#e2ddd1);border-radius:var(--radius,10px);padding:26px 24px">
-        <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent,#c9a227);margin-bottom:14px">02</div>
-        <h3 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:21px;margin:0 0 9px;color:var(--ink,#17242e);text-transform:var(--head-tr,none)">Gedimų diagnostika</h3>
-        <p style="font-size:14.5px;line-height:1.5;color:var(--muted,#5a6b76);margin:0">Tiksliai nustatome gedimą prieš remontą, kad žinotumėte, kas ir kiek kainuos.</p>
-      </div>
-      <div style="background:var(--card-bg,#fff);border:1px solid var(--card-border,#e2ddd1);border-radius:var(--radius,10px);padding:26px 24px">
-        <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent,#c9a227);margin-bottom:14px">03</div>
-        <h3 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:21px;margin:0 0 9px;color:var(--ink,#17242e);text-transform:var(--head-tr,none)">Tepalų ir filtrų keitimas</h3>
-        <p style="font-size:14.5px;line-height:1.5;color:var(--muted,#5a6b76);margin:0">Profilaktinis keitimas, kuris žymiai pailgina dėžės tarnavimą ir apsaugo nuo brangaus remonto.</p>
-      </div>
-      <div style="background:var(--card-bg,#fff);border:1px solid var(--card-border,#e2ddd1);border-radius:var(--radius,10px);padding:26px 24px">
-        <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent,#c9a227);margin-bottom:14px">04</div>
-        <h3 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:21px;margin:0 0 9px;color:var(--ink,#17242e);text-transform:var(--head-tr,none)">Mechaninės dėžės montavimas</h3>
-        <p style="font-size:14.5px;line-height:1.5;color:var(--muted,#5a6b76);margin:0">Perdarymas iš automatinės į mechaninę bei sankabos komplekto keitimas.</p>
-      </div>
-      <div style="background:var(--card-bg,#fff);border:1px solid var(--card-border,#e2ddd1);border-radius:var(--radius,10px);padding:26px 24px">
-        <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent,#c9a227);margin-bottom:14px">05</div>
-        <h3 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:21px;margin:0 0 9px;color:var(--ink,#17242e);text-transform:var(--head-tr,none)">Trumpesnės eigos svirtys</h3>
-        <p style="font-size:14.5px;line-height:1.5;color:var(--muted,#5a6b76);margin:0">Short-shifter sistemos ir modifikacijos aiškesniam, tikslesniam pavarų jungimui.</p>
-      </div>
-      <div style="background:var(--contact-bg,#0e1a24);border-radius:var(--radius,10px);padding:26px 24px;display:flex;flex-direction:column;justify-content:center">
-        <p style="font-size:15.5px;line-height:1.5;color:var(--contact-sub,#c9d2d8);margin:0 0 14px">Nežinote, kur bėda? Atveškite automobilį — meistras pravažiuos ir nustatys gedimą.</p>
-        <a href="#kontaktai" style="color:var(--accent,#c9a227);font-weight:700;font-size:15px">Užsakyti diagnostiką →</a>
-      </div>
-    </div>
-   </div>
-  </div>
-
-  <!-- why us -->
-  <div id="kodel" style="padding: 44px 5vw 64px; position: relative">
-   
-  <div style="max-width: 1160px; margin: 0 auto; background: var(--band-bg,#eae4d6); border-radius: var(--radius,12px); padding: 40px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px">
-      <div style="text-align:center"><div style="font-family: 'Barlow Condensed',sans-serif; font-weight: 700; font-size: 38px; color: var(--ink,#0e1a24)">Visos markės</div><div style="font-size: 14px; color: var(--muted,#5a6b76); margin-top: 4px">mechaninės pavarų dėžės</div></div>
-      <div style="text-align:center"><div style="font-family: 'Barlow Condensed',sans-serif; font-weight: 700; font-size: 38px; color: var(--ink,#0e1a24)">Be tarpininkų</div><div style="font-size: 14px; color: var(--muted,#5a6b76); margin-top: 4px">visą darbą atliekame patys</div></div>
-      <div style="text-align:center"><div style="font-family: 'Barlow Condensed',sans-serif; font-weight: 700; font-size: 38px; color: var(--ink,#0e1a24)">Garantija</div><div style="font-size: 14px; color: var(--muted,#5a6b76); margin-top: 4px">suteikiama atliktiems darbams</div></div>
-   </div></div>
-
-  <!-- contact -->
-  <div id="kontaktai" style="background:var(--contact-bg,#0e1a24);padding:60px 5vw">
-   <div style="max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:44px">
-    <div>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:36px;margin:0 0 22px;color:var(--contact-fg,#fff);text-transform:var(--head-tr,none);letter-spacing:var(--head-ls,normal)">Užsukite arba paskambinkite</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px 30px;font-size:15px;color:var(--contact-sub,#c9d2d8);line-height:1.5">
-        <div><div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--contact-label,#7d94a3);margin-bottom:5px">SERVISAS</div>Vasaros g. 44 / 44A<br>LT-68111 Marijampolė</div>
-        <div><div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--contact-label,#7d94a3);margin-bottom:5px">TELEFONAI</div>+370 699 31163<br>+370 608 68400</div>
-        <div><div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--contact-label,#7d94a3);margin-bottom:5px">EL. PAŠTAS</div>viktorma@inbox.lt</div>
-        <div><div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--contact-label,#7d94a3);margin-bottom:5px">DARBO LAIKAS</div>I–V 9:00–18:00<br>Savaitgaliais nedirbame</div>
-      </div>
-    </div>
-    <div style="border-radius:var(--radius,10px);background:repeating-linear-gradient(135deg,var(--ph-a,#16232e),var(--ph-a,#16232e) 13px,var(--ph-b,#1b2b38) 13px,var(--ph-b,#1b2b38) 26px);display:flex;align-items:center;justify-content:center;color:var(--ph-ink,#7d94a3);font-family:'Space Mono',monospace;font-size:13px;border:1px solid rgba(125,148,163,.25);min-height:220px">žemėlapis · Vasaros g. 44</div>
-   </div>
-  </div>
-  <div style="background:var(--foot-bg,#0a141c);padding:18px 5vw;color:var(--foot-ink,#5f7280)">
-   <div style="max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px">
-    <span>© 2026 Viktorma · Marijampolė</span><span>Pigesnės dalys — <a href="https://rrr.lt" style="color:var(--accent,#c9a227)">rrr.lt</a></span>
-   </div>
-  </div>
-
 </div>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Naktinis&quot;,&quot;Dienos&quot;,&quot;Cechas&quot;],&quot;default&quot;:&quot;Naktinis&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Nuotaika&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#c9a227&quot;,&quot;#b3391f&quot;,&quot;#4ea172&quot;,&quot;#2f6fb0&quot;],&quot;default&quot;:&quot;#c9a227&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Nuotaika&quot;},&quot;character&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Patikimas&quot;,&quot;Grubus&quot;,&quot;Sportinis&quot;],&quot;default&quot;:&quot;Patikimas&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Nuotaika&quot;}}">
-class Component extends DCLogic {
-  renderVals() {
-    const p = this.props || {};
-    const theme = p.theme || 'Naktinis';
-    const accent = p.accent || '#c9a227';
-    const character = p.character || 'Patikimas';
 
-    const themes = {
-      'Naktinis': {heroBg:'#0e1a24',heroFg:'#ffffff',heroSub:'#a9b6bf',heroBorder:'rgba(125,148,163,.35)',pageBg:'#f4f1ea',ink:'#17242e',muted:'#5a6b76',cardBg:'#ffffff',cardBorder:'#e2ddd1',bandBg:'#eae4d6',contactBg:'#0e1a24',contactFg:'#ffffff',contactSub:'#c9d2d8',contactLabel:'#7d94a3',footBg:'#0a141c',footInk:'#5f7280',phA:'#16232e',phB:'#1b2b38',phInk:'#7d94a3'},
-      'Dienos': {heroBg:'#f4f1ea',heroFg:'#17242e',heroSub:'#5a6b76',heroBorder:'rgba(23,36,46,.25)',pageBg:'#ffffff',ink:'#17242e',muted:'#5a6b76',cardBg:'#f7f4ee',cardBorder:'#e6e0d3',bandBg:'#f0ebe0',contactBg:'#17242e',contactFg:'#ffffff',contactSub:'#c9d2d8',contactLabel:'#8a99a3',footBg:'#111c24',footInk:'#6b7d89',phA:'#e7e2d6',phB:'#efeae0',phInk:'#9a9384'},
-      'Cechas': {heroBg:'#1c1b18',heroFg:'#f2ede3',heroSub:'#b3ab9c',heroBorder:'rgba(210,200,180,.22)',pageBg:'#e7e2d6',ink:'#20201c',muted:'#6a6559',cardBg:'#f2ede3',cardBorder:'#d8d2c4',bandBg:'#dcd6c8',contactBg:'#1c1b18',contactFg:'#f2ede3',contactSub:'#c3bcae',contactLabel:'#8a8375',footBg:'#141310',footInk:'#7a7365',phA:'#26251f',phB:'#2f2e26',phInk:'#8a8375'}
-    };
-    const t = themes[theme] || themes['Naktinis'];
+<header class="top" id="top">
+  <a class="logo" href="#">VIKTORMA</a>
+  <a class="top-call" href="tel:+37069931163"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>Skambinti</a>
+</header>
 
-    const lightAccents = ['#c9a227', '#4ea172'];
-    const accentInk = lightAccents.includes(accent) ? '#0e1a24' : '#ffffff';
+<main>
+  <section class="hero">
+    <div class="field" data-field="bearing,6,9,70,1.4,line;sprocket:14,74,12,54,2,line;gear:10,60,28,36,2.6,steel;clutch,-6,46,90,.8,line;flywheel,70,48,64,1.6,line;fork,22,30,40,2.2,line"></div>
+    <div class="mesh" id="mesh" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="eyebrow">Viktorma · Marijampolė</p>
+      <h1 class="display hero-line">Mechaninių pavarų dėžių <em>remontas</em></h1>
+    </div>
+  </section>
 
-    const chars = {
-      'Patikimas': {radius:'10px', btn:'7px', tr:'none', ls:'normal'},
-      'Grubus':    {radius:'0px',  btn:'0px', tr:'uppercase', ls:'.03em'},
-      'Sportinis': {radius:'4px',  btn:'40px', tr:'none', ls:'-.015em'}
-    };
-    const c = chars[character] || chars['Patikimas'];
+  <section class="story" aria-label="Viktorma istorija">
+    <div class="stage" id="stage" data-step="1" aria-hidden="true">
+      <div class="steps"><i></i><i></i><i></i></div>
+      <div class="scene s1">
+        <div class="box tone-steel" data-part="gearbox"></div>
+      </div>
+      <div class="scene s2">
+        <div class="cut tone-white spin" style="--spin:40s" data-part="cutaway:28"></div>
+        <div class="sh tone-steel" data-part="shaft"></div>
+      </div>
+      <div class="scene s3">
+        <div class="cl tone-steel spin" style="--spin:30s" data-part="clutch"></div>
+        <div class="br tone-white spin" style="--spin:16s;--dir:reverse" data-part="bearing"></div>
+        <svg class="badge" viewBox="0 0 100 100">
+          <defs><path id="bp" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+          <circle class="core" cx="50" cy="50" r="22"/>
+          <path d="M40,50 l7,7 l13,-14" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <g class="spin" style="--spin:26s;transform-origin:50px 50px"><text><textPath href="#bp">GARANTIJA DARBAMS · VIKTORMA ·</textPath></text></g>
+        </svg>
+      </div>
+    </div>
 
-    const rootStyle = [
-      `--accent:${accent}`, `--accent-ink:${accentInk}`,
-      `--hero-bg:${t.heroBg}`, `--hero-fg:${t.heroFg}`, `--hero-sub:${t.heroSub}`, `--hero-border:${t.heroBorder}`,
-      `--page-bg:${t.pageBg}`, `--ink:${t.ink}`, `--muted:${t.muted}`,
-      `--card-bg:${t.cardBg}`, `--card-border:${t.cardBorder}`, `--band-bg:${t.bandBg}`,
-      `--contact-bg:${t.contactBg}`, `--contact-fg:${t.contactFg}`, `--contact-sub:${t.contactSub}`, `--contact-label:${t.contactLabel}`,
-      `--foot-bg:${t.footBg}`, `--foot-ink:${t.footInk}`,
-      `--ph-a:${t.phA}`, `--ph-b:${t.phB}`, `--ph-ink:${t.phInk}`,
-      `--radius:${c.radius}`, `--btn-radius:${c.btn}`, `--head-tr:${c.tr}`, `--head-ls:${c.ls}`
-    ].join(';');
+    <article class="chapter" data-step="1">
+      <div class="wrap"><div class="reveal">
+        <span class="num">01 / 03 · Gedimas</span>
+        <h2 class="display">Pavarų dėžė sugedo</h2>
+        <p>Nejunga pavara, slysta sankaba ar dėžė tiesiog nebeveikia taip, kaip turėtų. Nesvarbu, kas tiksliai nutiko.</p>
+      </div></div>
+    </article>
+    <article class="chapter" data-step="2">
+      <div class="wrap"><div class="reveal">
+        <span class="num">02 / 03 · Viktorma</span>
+        <h2 class="display">Atvežate ją mums</h2>
+        <p>Nustatome gedimą, išardome dėžę ir sutaisome tai, kas sugedo.</p>
+      </div></div>
+    </article>
+    <article class="chapter" data-step="3">
+      <div class="wrap"><div class="reveal">
+        <span class="num">03 / 03 · Sutaisyta</span>
+        <h2 class="display">Ir važiuojate toliau</h2>
+        <p>Dėžė vėl veikia, o atliktiems darbams suteikiame garantiją.</p>
+      </div></div>
+    </article>
+  </section>
 
-    return { rootStyle };
-  }
-}
+
+  <section class="section fix" id="paslaugos">
+    <div class="field" data-field="gear:22,84,4,120,1,line;bearing,-8,58,110,1.6,line;pressure,88,88,90,1.3,line;plug,6,30,34,2.2,line"></div>
+    <div class="wrap" style="position:relative;z-index:1">
+      <div class="words" aria-label="Gedimai, kuriuos taisome">
+        <div class="cloud">
+          <span class="w m" style="--y:6px;--dx:4px;--dy:-5px;--t:7.0s">Iššoka pavara</span>
+          <span class="w s" style="--y:0px;--dx:-6px;--dy:4px;--t:8.4s">Teka tepalas</span>
+          <span class="w l" style="--y:0px;--dx:5px;--dy:-3px;--t:9.8s">Nejunga pavara</span>
+          <span class="w s" style="--y:6px;--dx:-3px;--dy:6px;--t:11.2s">Klibėja svirtis</span>
+          <span class="w m g" style="--y:-6px;--dx:7px;--dy:-4px;--t:12.6s">Slysta sankaba</span>
+          <span class="w s" style="--y:3px;--dx:4px;--dy:-5px;--t:7.0s">Kietas pedalas</span>
+          <span class="w l" style="--y:-3px;--dx:-6px;--dy:4px;--t:8.4s">Sunkiai jungiasi</span>
+          <span class="w s" style="--y:-6px;--dx:5px;--dy:-3px;--t:9.8s">Trūksta pavaros</span>
+          <span class="w m" style="--y:-3px;--dx:-3px;--dy:6px;--t:11.2s">Sugedęs guolis</span>
+        </div>
+        <div class="section-head reveal">
+          <h2 class="display">Kad ir kas sugedo, <em>sutaisome</em></h2>
+        </div>
+        <div class="cloud">
+          <span class="w s" style="--y:-6px;--dx:5px;--dy:-3px;--t:9.8s">Neįsijungia atbulinė</span>
+          <span class="w l g" style="--y:0px;--dx:-3px;--dy:6px;--t:11.2s">Lūžęs krumpliaratis</span>
+          <span class="w m" style="--y:3px;--dx:7px;--dy:-4px;--t:12.6s">Kvepia degėsiais</span>
+          <span class="w s" style="--y:-3px;--dx:4px;--dy:-5px;--t:7.0s">Strigusi svirtis</span>
+          <span class="w m" style="--y:3px;--dx:-6px;--dy:4px;--t:8.4s">Nusidėvėję sinchronai</span>
+          <span class="w l" style="--y:6px;--dx:5px;--dy:-3px;--t:9.8s">Sankabos gedimas</span>
+          <span class="w s" style="--y:-6px;--dx:-3px;--dy:6px;--t:11.2s">Pratekėjęs riebokšlis</span>
+          <span class="w m" style="--y:6px;--dx:7px;--dy:-4px;--t:12.6s">Vibruoja svirtis</span>
+        </div>
+      </div>
+      <p class="fix-line reveal">Nebūtina žinoti, kaip vadinasi gedimas. Užtenka papasakoti, kas negerai, o toliau tai mūsų darbas.</p>
+      <div class="reveal" style="text-align:center;margin-top:26px"><a class="btn btn-ink" href="tel:+37069931163">Papasakokite telefonu <span class="arr" aria-hidden="true">→</span></a></div>
+
+    </div>
+  </section>
+
+  <section class="cta dark" id="registracija">
+    <div class="field" data-field="gear:30,62,8,260,.6,nightline;cutaway:20,-12,60,180,1.2,night;sprocket:16,78,70,110,1.8,night;bearing,40,90,70,2.4,nightline;pressure,84,30,80,1.4,nightline;lever,8,16,40,2,nightline"></div>
+    <div class="wrap reveal">
+      <p class="eyebrow">Registracija</p>
+      <h2 class="display">Sutaisykime jūsų <em>pavarų dėžę</em></h2>
+      <p class="lead">Paskambinkite ir susitarsime laiką. Meistras patikrins automobilį, pasakys, kas negerai ir kiek kainuos, ir tik tada imsimės darbo.</p>
+      <div class="cta-actions">
+        <a class="btn btn-green" href="tel:+37069931163">Registruotis remontui <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn btn-line" href="#kontaktai">Kaip mus rasti</a>
+      </div>
+      <p class="cta-note">I–V 9:00–18:00 · +370 699 31163</p>
+    </div>
+  </section>
+
+  <section class="section" id="dalys" style="padding-top:24px">
+    <div class="wrap">
+      <div class="shop dark reveal">
+        <div class="field" data-field="sprocket:18,52,58,200,.5,night;gear:12,20,72,120,1.2,green;bearing,78,40,90,1.6,nightline"></div>
+        <div class="txt">
+          <p class="eyebrow">Dalys</p>
+          <h2 class="display">Pavarų dėžių dalys internetu</h2>
+          <p class="lead">Netrukus dalis čia rasite pagal gamintoją, metus ir modelį. Kol kas jų ieškokite rrr.lt.</p>
+          <a class="btn btn-line" href="https://rrr.lt" target="_blank" rel="noopener">Dalys rrr.lt <span class="arr" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="kontaktai" style="padding-top:24px">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Kontaktai</p>
+        <h2 class="display">Vasaros g. 44, Marijampolė</h2>
+      </div>
+      <div class="contact reveal">
+        <div><h4>Servisas</h4><p>Vasaros g. 44 / 44A<br>LT-68111 Marijampolė</p></div>
+        <div><h4>Telefonai</h4><p><a href="tel:+37069931163">+370 699 31163</a><br><a href="tel:+37060868400">+370 608 68400</a></p></div>
+        <div><h4>El. paštas</h4><p><a href="mailto:viktorma@inbox.lt">viktorma@inbox.lt</a></p></div>
+        <div><h4>Darbo laikas</h4><p>I–V 9:00–18:00<br><span style="color:var(--dim)">Savaitgaliais nedirbame</span></p></div>
+      </div>
+      <div class="contact-actions reveal">
+        <a class="btn btn-ink" href="tel:+37069931163">Skambinti</a>
+        <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Vasaros+g.+44,+Marijampol%C4%97" target="_blank" rel="noopener">Atidaryti žemėlapį <span class="arr" aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer dark">
+  <div class="field" data-field="gear:24,80,10,220,.6,nightline;clutch,-10,60,160,1,nightline;seal,50,80,70,1.6,nightline"></div>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">VIKTORMA</div>
+        <p style="margin-top:12px;color:#8d96a0">Mechaninių pavarų dėžių remontas Marijampolėje.</p>
+        <!-- TODO: replace # with the real social profile links -->
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zM12 2c-2.7 0-3 0-4.1.1C4.4 2.2 2.2 4.4 2.1 7.9 2 9 2 9.3 2 12s0 3 .1 4.1c.1 3.5 2.3 5.7 5.8 5.8 1.1.1 1.4.1 4.1.1s3 0 4.1-.1c3.5-.1 5.7-2.3 5.8-5.8.1-1.1.1-1.4.1-4.1s0-3-.1-4.1c-.1-3.5-2.3-5.7-5.8-5.8C15 2 14.7 2 12 2zm0 1.8c2.7 0 3 0 4 .1 2.5.1 3.9 1.5 4 4 .1 1 .1 1.3.1 4s0 3-.1 4c-.1 2.5-1.5 3.9-4 4-1 .1-1.3.1-4 .1s-3 0-4-.1c-2.5-.1-3.9-1.5-4-4-.1-1-.1-1.3-.1-4s0-3 .1-4c.1-2.5 1.5-3.9 4-4 1-.1 1.3-.1 4-.1z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Kontaktai</h4>
+        <p>Vasaros g. 44 / 44A</p>
+        <p><a href="tel:+37069931163">+370 699 31163</a></p>
+        <p><a href="mailto:viktorma@inbox.lt">viktorma@inbox.lt</a></p>
+      </div>
+      <div>
+        <h4>Svetainė</h4>
+        <p><a href="#paslaugos">Gedimai</a></p>
+        <p><a href="#dalys">Dalys</a></p>
+        <p><a href="#kontaktai">Kontaktai</a></p>
+      </div>
+      <div>
+        <h4>Rekvizitai</h4>
+        <!-- TODO: fill in the real company details -->
+        <p>[Įmonės pavadinimas]</p>
+        <p>Įm. kodas [000000000]</p>
+        <p>PVM [LT000000000]</p>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© <span id="yr">2026</span> Viktorma</span>
+      <span><a href="#">Privatumo politika</a> · <a href="#">Slapukai</a></span>
+      <span>Svetainę kuria ir prižiūri <a href="https://kilk.pro" target="_blank" rel="noopener">Kilk.pro</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/parts.js"></script>
+<script src="assets/motion.js" defer></script>
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Header turns solid after the hero.
+  (function () {
+    var top = document.getElementById('top');
+    var f = function () { top.classList.toggle('solid', scrollY > innerHeight * .7); };
+    addEventListener('scroll', f, { passive: true }); f();
+  })();
+
+  // Story: the chapter in view picks the scene on the sticky stage.
+  (function () {
+    var stage = document.getElementById('stage');
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) stage.dataset.step = e.target.dataset.step; });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    document.querySelectorAll('.chapter').forEach(function (c) { io.observe(c); });
+  })();
+
+  // Hero: a 24-tooth gear driving a 12-tooth pinion, meshed, turning with time and scroll.
+  (function () {
+    var mesh = document.getElementById('mesh');
+    var a = document.createElement('div'), b = document.createElement('div');
+    a.className = 'tone-steel'; b.className = 'tone-green';
+    a.innerHTML = VParts.gear({ n: 24, holes: 6 }); b.innerHTML = VParts.gear({ n: 12 });
+    mesh.append(a, b);
+    var TAU = Math.PI * 2, pA = TAU / 24, pB = TAU / 12, th = -2.45, A0, B0, cx, cy, wA, wB;
+    function layout() {
+      var W = mesh.clientWidth, H = mesh.clientHeight, big = W < 900;
+      wA = big ? Math.min(W * 1.05, 520) : Math.min(W * .42, 620); wB = wA / 2;
+      cx = big ? W * .92 : W * .82; cy = big ? H * .97 : H * .62;
+      var D = wA / 2 * .96 + wB / 2 * .9;   // sum of pitch radii (tooth depth differs per gear)
+      var bx = cx + Math.cos(th) * D, by = cy + Math.sin(th) * D;
+      a.style.cssText = 'width:' + wA + 'px;left:' + (cx - wA / 2) + 'px;top:' + (cy - wA / 2) + 'px';
+      b.style.cssText = 'width:' + wB + 'px;left:' + (bx - wB / 2) + 'px;top:' + (by - wB / 2) + 'px';
+      A0 = th + .175 * pA; B0 = th + Math.PI - .325 * pB;   // valley of A faces a tooth of B on the centre line
+    }
+    layout(); addEventListener('resize', layout);
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function frame(t) {
+      var phi = reduce ? 0 : t / 1000 * .12 + scrollY * .002;
+      a.style.transform = 'rotate(' + (A0 + phi) + 'rad)';
+      b.style.transform = 'rotate(' + (B0 - 2 * phi) + 'rad)';
+      if (!reduce && scrollY < innerHeight * 1.2) requestAnimationFrame(frame); else if (!reduce) setTimeout(function () { requestAnimationFrame(frame); }, 300);
+    }
+    requestAnimationFrame(frame);
+  })();
 </script>
 </body>
 </html>
