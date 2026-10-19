@@ -107,8 +107,8 @@
   @media (min-width: 900px) { .words { width: min(100vw, 1100px); margin-left: auto; margin-right: auto; height: 520px; } }
   .fix-line { max-width: 40ch; margin: 18px auto 0; text-align: center; color: var(--dim); }
   .proof { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--ink); }
-  .proof div { padding: 18px 10px 0 0; }
-  .proof b { display: block; font: 600 clamp(30px, 9vw, 64px)/1 var(--f-sans); font-stretch: 75%; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .proof div { padding: 18px 10px 0 0; } .proof span { display: block; margin-top: 6px; }
+  .proof b { display: block; font: 600 clamp(26px, 7.4vw, 56px)/1 var(--f-sans); font-stretch: 75%; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
   .proof span { font-size: 13px; color: var(--dim); }
 
   .shop { position: relative; overflow: hidden; border-radius: 28px; padding: 40px 26px 220px; }
@@ -145,9 +145,9 @@
     <div class="field" data-field="bearing,6,9,70,1.4,line;sprocket:14,74,12,54,2,line;gear:10,60,28,36,2.6,steel;clutch,-6,46,90,.8,line;flywheel,70,48,64,1.6,line;fork,22,30,40,2.2,line"></div>
     <div class="mesh" id="mesh" aria-hidden="true"></div>
     <div class="wrap">
-      <p class="eyebrow">Marijampolė · Mechaninės pavarų dėžės</p>
-      <h1 class="display hero-line">Kiekviena pavara turi savo <em>istoriją</em></h1>
-      <p class="lead">Slinkite ir pamatysite, kaip ji vėl atgyja.</p>
+      <p class="eyebrow">Viktorma · Marijampolė</p>
+      <h1 class="display hero-line">Jūs vairuojate. <em>Mes klausomės.</em></h1>
+      <p class="lead">Mechaninių pavarų dėžių remontas.</p>
     </div>
     <div class="scroll-cue">Slinkite<i></i></div>
   </section>
@@ -158,13 +158,13 @@
       <div class="scene s1">
         <div class="box tone-steel" data-part="gearbox"></div>
         <svg class="waves" viewBox="0 0 60 100"><path d="M20,30 Q32,50 20,70"/><path d="M30,20 Q48,50 30,80"/><path d="M40,10 Q64,50 40,90"/></svg>
-        <span class="callout" style="right:2%;top:12%">Klausomės</span>
-        <span class="callout" style="left:30%;bottom:16%">Matuojame</span>
+        <span class="callout" style="right:2%;top:12%">Traška?</span>
+        <span class="callout" style="left:30%;bottom:16%">Ūžia?</span>
       </div>
       <div class="scene s2">
         <div class="cut tone-white spin" style="--spin:40s" data-part="cutaway:28"></div>
         <div class="sh tone-steel" data-part="shaft"></div>
-        <span class="callout" style="left:0;top:8%">Tolerancija 0,02 mm</span>
+        <span class="callout" style="left:0;top:8%">Tikriname kiekvieną detalę</span>
       </div>
       <div class="scene s3">
         <div class="cl tone-steel spin" style="--spin:30s" data-part="clutch"></div>
@@ -173,47 +173,34 @@
           <defs><path id="bp" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
           <circle class="core" cx="50" cy="50" r="22"/>
           <path d="M40,50 l7,7 l13,-14" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <g class="spin" style="--spin:26s;transform-origin:50px 50px"><text><textPath href="#bp">GARANTIJA · ORIGINALŪS REMKOMPLEKTAI ·</textPath></text></g>
+          <g class="spin" style="--spin:26s;transform-origin:50px 50px"><text><textPath href="#bp">GARANTIJA DARBAMS · VIKTORMA ·</textPath></text></g>
         </svg>
       </div>
     </div>
 
     <article class="chapter" data-step="1">
       <div class="wrap"><div class="reveal">
-        <span class="num">01 / 03 · Diagnostika</span>
-        <h2 class="display">Viskas prasideda nuo garso</h2>
-        <p>Meistras pravažiuoja jūsų automobiliu ir išgirsta, kas negerai. Gedimą nustatome prieš remontą, todėl kainą žinote iš anksto.</p>
+        <span class="num">01 / 03 · Išgirsti</span>
+        <h2 class="display">Garsas, kurį girdite kasdien</h2>
+        <p>Traškesys perjungiant, ūžimas greitėjant. Jums tai įprastas triukšmas, mums užuomina. Meistras pravažiuoja ir pasako, kur bėda, dar prieš ardydamas dėžę.</p>
       </div></div>
     </article>
     <article class="chapter" data-step="2">
       <div class="wrap"><div class="reveal">
-        <span class="num">02 / 03 · Remontas</span>
-        <h2 class="display">Tada kalba rankos</h2>
-        <p>Ardome, matuojame kiekvieną guolį ir krumpliaratį, atstatome iki gamyklinių parametrų. Viską darome patys, savo dirbtuvėje. Nevežame kitiems.</p>
+        <span class="num">02 / 03 · Atverti</span>
+        <h2 class="display">Atidarome ir nespėliojame</h2>
+        <p>Išardome, apžiūrime kiekvieną krumpliaratį, guolį ir veleną. Keičiame tai, kas susidėvėjo. Visą darbą atliekame patys, savo dirbtuvėje.</p>
       </div></div>
     </article>
     <article class="chapter" data-step="3">
       <div class="wrap"><div class="reveal">
-        <span class="num">03 / 03 · Garantija</span>
-        <h2 class="display">Ir žodis, kurio laikomės</h2>
-        <p>Originalūs remkomplektai ir garantija kiekvienam atliktam darbui.</p>
+        <span class="num">03 / 03 · Grąžinti</span>
+        <h2 class="display">Ir vėl tylu</h2>
+        <p>Pavaros jungiasi lengvai, svirtis neklibėja, kelyje girdite tik variklį. Atliktiems darbams suteikiame garantiją.</p>
       </div></div>
     </article>
   </section>
 
-  <section class="cta dark" id="registracija">
-    <div class="field" data-field="gear:30,62,8,260,.6,nightline;cutaway:20,-12,60,180,1.2,night;sprocket:16,78,70,110,1.8,night;bearing,40,90,70,2.4,nightline;pressure,84,30,80,1.4,nightline;lever,8,16,40,2,nightline"></div>
-    <div class="wrap reveal">
-      <p class="eyebrow">Jūsų eilė</p>
-      <h2 class="display">Dėžė vėl važiuos <em>kaip nauja</em></h2>
-      <p class="lead">Paskambinkite ir susitarsime laiką. Meistras apžiūrės automobilį ir pasakys, ką reikia daryti.</p>
-      <div class="cta-actions">
-        <a class="btn btn-green" href="tel:+37069931163">Registruotis remontui <span class="arr" aria-hidden="true">→</span></a>
-        <a class="btn btn-line" href="#kontaktai">Kaip mus rasti</a>
-      </div>
-      <p class="cta-note">I–V 9:00–18:00 · +370 699 31163</p>
-    </div>
-  </section>
 
   <section class="section fix" id="paslaugos">
     <div class="field" data-field="gear:22,84,4,120,1,line;bearing,-8,58,110,1.6,line;pressure,88,88,90,1.3,line;plug,6,30,34,2.2,line"></div>
@@ -221,8 +208,8 @@
       <div class="words" aria-label="Gedimai, kuriuos taisome">
         <div class="words-mid">
           <div class="section-head reveal" style="text-align:center;justify-items:center">
-            <p class="eyebrow">Mechaninės pavarų dėžės</p>
-            <h2 class="display">Kad ir kas negerai, <em>sutaisome</em></h2>
+            <p class="eyebrow">Skamba pažįstamai?</p>
+            <h2 class="display">Kad ir kas tai būtų, <em>sutaisome</em></h2>
           </div>
         </div>
         <span class="w l" style="left:42%;top:71%;--dx:4px;--dy:-5px;--t:7.0s">Kaukia važiuojant</span>
@@ -243,8 +230,8 @@
         <span class="w s" style="left:50%;top:78%;--dx:4px;--dy:-5px;--t:7.0s">Barška stovint</span>
         <span class="w s" style="left:5%;top:87%;--dx:-6px;--dy:4px;--t:8.4s">Ūžia guolis</span>
       </div>
-      <p class="fix-line reveal">Nereikia žinoti, kaip vadinasi gedimas. Atveškite automobilį: išklausysime, surasime priežastį ir sutaisysime. Atliktiems darbams suteikiame garantiją.</p>
-      <div class="reveal" style="text-align:center;margin-top:26px"><a class="btn btn-ink" href="tel:+37069931163">Aprašykite gedimą telefonu <span class="arr" aria-hidden="true">→</span></a></div>
+      <p class="fix-line reveal">Nebūtina žinoti, kaip vadinasi gedimas. Užtenka papasakoti, ką girdite ir jaučiate. Toliau tai mūsų darbas.</p>
+      <div class="reveal" style="text-align:center;margin-top:26px"><a class="btn btn-ink" href="tel:+37069931163">Papasakokite telefonu <span class="arr" aria-hidden="true">→</span></a></div>
 
     </div>
   </section>
@@ -252,9 +239,23 @@
   <section class="section" id="kodel" style="padding-top:24px">
     <div class="wrap">
       <div class="proof reveal">
-        <div><b>0</b><span>tarpininkų</span></div>
-        <div><b>100%</b><span>darbų su garantija</span></div>
+        <div><b>Patys</b><span>visą darbą atliekame savo dirbtuvėje</span></div>
+        <div><b>Garantija</b><span>kiekvienam atliktam darbui</span></div>
       </div>
+    </div>
+  </section>
+
+  <section class="cta dark" id="registracija">
+    <div class="field" data-field="gear:30,62,8,260,.6,nightline;cutaway:20,-12,60,180,1.2,night;sprocket:16,78,70,110,1.8,night;bearing,40,90,70,2.4,nightline;pressure,84,30,80,1.4,nightline;lever,8,16,40,2,nightline"></div>
+    <div class="wrap reveal">
+      <p class="eyebrow">Registracija</p>
+      <h2 class="display">Grąžinkime jūsų dėžei <em>tylą</em></h2>
+      <p class="lead">Paskambinkite ir susitarsime laiką. Meistras patikrins automobilį, pasakys, kas negerai ir kiek kainuos, ir tik tada imsimės darbo.</p>
+      <div class="cta-actions">
+        <a class="btn btn-green" href="tel:+37069931163">Registruotis remontui <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn btn-line" href="#kontaktai">Kaip mus rasti</a>
+      </div>
+      <p class="cta-note">I–V 9:00–18:00 · +370 699 31163</p>
     </div>
   </section>
 
@@ -264,8 +265,8 @@
         <div class="field" data-field="sprocket:18,52,58,200,.5,night;gear:12,20,72,120,1.2,green;bearing,78,40,90,1.6,nightline"></div>
         <div class="txt">
           <p class="eyebrow">Dalys</p>
-          <h2 class="display">Dalių parduotuvė jau ruošiama</h2>
-          <p class="lead">Netrukus visas pavarų dėžių dalis rasite čia, su paieška pagal gamintoją, metus ir modelį. Kol kas pigesnių dalių ieškokite rrr.lt.</p>
+          <h2 class="display">Pavarų dėžių dalys internetu</h2>
+          <p class="lead">Netrukus dalis čia rasite pagal gamintoją, metus ir modelį. Kol kas jų ieškokite rrr.lt.</p>
           <a class="btn btn-line" href="https://rrr.lt" target="_blank" rel="noopener">Dalys rrr.lt <span class="arr" aria-hidden="true">↗</span></a>
         </div>
       </div>
@@ -276,7 +277,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <p class="eyebrow">Kontaktai</p>
-        <h2 class="display">Užsukite arba paskambinkite</h2>
+        <h2 class="display">Vasaros g. 44, Marijampolė</h2>
       </div>
       <div class="contact reveal">
         <div><h4>Servisas</h4><p>Vasaros g. 44 / 44A<br>LT-68111 Marijampolė</p></div>
@@ -298,7 +299,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">VIKTORMA</div>
-        <p style="margin-top:12px;color:#8d96a0">Mechaninių pavarų dėžių servisas Marijampolėje.</p>
+        <p style="margin-top:12px;color:#8d96a0">Mechaninių pavarų dėžių remontas Marijampolėje.</p>
         <!-- TODO: replace # with the real social profile links -->
         <div class="socials">
           <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></a>
@@ -313,7 +314,7 @@
       </div>
       <div>
         <h4>Svetainė</h4>
-        <p><a href="#paslaugos">Paslaugos</a></p>
+        <p><a href="#paslaugos">Gedimai</a></p>
         <p><a href="#dalys">Dalys</a></p>
         <p><a href="#kontaktai">Kontaktai</a></p>
       </div>
