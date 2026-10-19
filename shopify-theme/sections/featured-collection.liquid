@@ -1,0 +1,27 @@
+<section class="block">
+  <div class="wrap">
+    <div class="block-head reveal">
+      <h2 class="display">{{ section.settings.heading }}</h2>
+      <a class="more" href="{{ section.settings.collection.url | default: routes.all_products_collection_url }}">Visos →</a>
+    </div>
+    <div class="grid">
+      {%- for product in section.settings.collection.products limit: section.settings.count -%}
+        {% render 'product-card', product: product %}
+      {%- else -%}
+        {%- for i in (1..4) %}<div class="card"><div class="card-img"><div class="ph">{{ 'product-1' | placeholder_svg_tag }}</div></div></div>{% endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Išskirtinės dalys",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Antraštė", "default": "Naujausios dalys" },
+    { "type": "collection", "id": "collection", "label": "Kolekcija" },
+    { "type": "range", "id": "count", "label": "Kiekis", "min": 2, "max": 12, "step": 2, "default": 6 }
+  ],
+  "presets": [{ "name": "Išskirtinės dalys" }]
+}
+{% endschema %}

@@ -1,0 +1,38 @@
+{%- comment -%}
+  Usage: render 'filters', results: collection | search, action: url, sort_by: sort_by
+  Filters come from the Shopify Search & Discovery app (see shopify-theme/README.md).
+{%- endcomment -%}
+<form id="filter-form" class="filters" action="{{ action }}" method="get">
+  {%- if results.terms %}<input type="hidden" name="q" value="{{ results.terms | escape }}">{% endif -%}
+  {%- if sort_by != blank %}<input type="hidden" name="sort_by" value="{{ sort_by }}">{% endif -%}
+  <div class="filters-head">
+    <h2 class="display">Filtrai</h2>
+    <button type="button" class="icon-btn" data-toggle="filters" aria-label="Uždaryti">✕</button>
+  </div>
+  {%- for filter in results.filters -%}
+    <details class="f-group"{% if filter.active_values.size > 0 or forloop.index <= 2 %} open{% endif %}>
+      <summary>{{ filter.label }}{% if filter.active_values.size > 0 %} <i>{{ filter.active_values.size }}</i>{% endif %}</summary>
+      {%- if filter.type == 'price_range' -%}
+        <div class="f-price">
+          <input type="number" inputmode="numeric" name="{{ filter.min_value.param_name }}" placeholder="Nuo" min="0" value="{% if filter.min_value.value %}{{ filter.min_value.value | money_without_currency | remove: ',' }}{% endif %}">
+          <span>–</span>
+          <input type="number" inputmode="numeric" name="{{ filter.max_value.param_name }}" placeholder="Iki" min="0" value="{% if filter.max_value.value %}{{ filter.max_value.value | money_without_currency | remove: ',' }}{% endif %}">
+        </div>
+      {%- else -%}
+        <div class="f-list">
+        {%- for v in filter.values -%}
+          <label class="f-opt{% if v.count == 0 and v.active == false %} off{% endif %}">
+            <input type="checkbox" name="{{ v.param_name }}" value="{{ v.value }}"{% if v.active %} checked{% endif %}{% if v.count == 0 and v.active == false %} disabled{% endif %}>
+            <span>{{ v.label }}</span><em>{{ v.count }}</em>
+          </label>
+        {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </details>
+  {%- endfor -%}
+  <div class="filters-foot">
+    <button type="submit" class="btn btn-gold">Rodyti rezultatus</button>
+    {%- if results.filters != empty -%}<a class="btn btn-ghost" href="{{ action }}{% if results.terms %}?q={{ results.terms | url_encode }}{% endif %}">Išvalyti</a>{%- endif -%}
+  </div>
+</form>
+<div class="filters-scrim" data-toggle="filters"></div>
