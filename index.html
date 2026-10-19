@@ -95,14 +95,16 @@
   .services { display: grid; gap: 12px; grid-template-columns: 1fr; }
   .fix h2 { max-width: 12ch; }
   .fix { overflow: hidden; }
-  .words { position: relative; width: 100vw; margin: 4px 0 0 calc(50% - 50vw); max-width: none; height: clamp(300px, 82vw, 440px); }
+  .words { position: relative; width: 100vw; margin: 0 0 0 calc(50% - 50vw); max-width: none; height: clamp(500px, 132vw, 600px); }
+  .words-mid { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+  .words-mid .section-head { margin: 0; }
   .w { position: absolute; white-space: nowrap; font: 500 12px/1 var(--f-sans); color: var(--dim); will-change: transform;
     animation: float var(--t, 8s) ease-in-out infinite alternate; }
   .w.m { font-size: 14px; color: var(--ink); }
   .w.l { font-size: clamp(17px, 4.6vw, 24px); font-weight: 700; font-stretch: 108%; color: var(--ink); letter-spacing: -.01em; }
   .w.g { color: var(--green); }
   @keyframes float { from { transform: translate(calc(var(--dx) * -1), calc(var(--dy) * -1)); } to { transform: translate(var(--dx), var(--dy)); } }
-  @media (min-width: 900px) { .words { width: min(100vw, 1100px); margin-left: auto; margin-right: auto; height: 380px; } }
+  @media (min-width: 900px) { .words { width: min(100vw, 1100px); margin-left: auto; margin-right: auto; height: 520px; } }
   .fix-line { max-width: 40ch; margin: 18px auto 0; text-align: center; color: var(--dim); }
   .proof { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--ink); }
   .proof div { padding: 18px 10px 0 0; }
@@ -216,28 +218,30 @@
   <section class="section fix" id="paslaugos">
     <div class="field" data-field="gear:22,84,4,120,1,line;bearing,-8,58,110,1.6,line;pressure,88,88,90,1.3,line;plug,6,30,34,2.2,line"></div>
     <div class="wrap" style="position:relative;z-index:1">
-      <div class="section-head reveal" style="text-align:center;justify-items:center">
-        <p class="eyebrow">Mechaninės pavarų dėžės</p>
-        <h2 class="display">Kad ir kas negerai, <em>sutaisome</em></h2>
-      </div>
-      <div class="words reveal" aria-label="Gedimai, kuriuos taisome">
-        <span class="w l" style="left:17%;top:14%;--dx:4px;--dy:-5px;--t:7.0s">Kaukia važiuojant</span>
-        <span class="w l" style="left:31%;top:33%;--dx:-6px;--dy:4px;--t:8.4s">Traška jungiant</span>
-        <span class="w l" style="left:5%;top:46%;--dx:5px;--dy:-3px;--t:9.8s">Neaiškus garsas</span>
-        <span class="w l g" style="left:26%;top:74%;--dx:-3px;--dy:6px;--t:11.2s">Nejunga pavara</span>
-        <span class="w m" style="left:40%;top:86%;--dx:7px;--dy:-4px;--t:12.6s">Vibruoja svirtis</span>
-        <span class="w m g" style="left:61%;top:4%;--dx:4px;--dy:-5px;--t:7.0s">Sunkiai jungiasi</span>
-        <span class="w s" style="left:51%;top:64%;--dx:-6px;--dy:4px;--t:8.4s">Dūzgia ant tuščios</span>
-        <span class="w m" style="left:4%;top:61%;--dx:5px;--dy:-3px;--t:9.8s">Kietas pedalas</span>
-        <span class="w s" style="left:51%;top:53%;--dx:-3px;--dy:6px;--t:11.2s">Kvepia degėsiais</span>
-        <span class="w m" style="left:41%;top:24%;--dx:7px;--dy:-4px;--t:12.6s">Iššoka pavara</span>
-        <span class="w s" style="left:24%;top:5%;--dx:4px;--dy:-5px;--t:7.0s">Ūžia greitėjant</span>
-        <span class="w s" style="left:3%;top:87%;--dx:-6px;--dy:4px;--t:8.4s">Trūksta pavaros</span>
-        <span class="w s" style="left:58%;top:44%;--dx:5px;--dy:-3px;--t:9.8s">Klibėja svirtis</span>
-        <span class="w m" style="left:70%;top:76%;--dx:-3px;--dy:6px;--t:11.2s">Teka tepalas</span>
-        <span class="w s" style="left:9%;top:24%;--dx:7px;--dy:-4px;--t:12.6s">Slysta sankaba</span>
-        <span class="w s" style="left:2%;top:35%;--dx:4px;--dy:-5px;--t:7.0s">Barška stovint</span>
-        <span class="w s" style="left:74%;top:14%;--dx:-6px;--dy:4px;--t:8.4s">Ūžia guolis</span>
+      <div class="words" aria-label="Gedimai, kuriuos taisome">
+        <div class="words-mid">
+          <div class="section-head reveal" style="text-align:center;justify-items:center">
+            <p class="eyebrow">Mechaninės pavarų dėžės</p>
+            <h2 class="display">Kad ir kas negerai, <em>sutaisome</em></h2>
+          </div>
+        </div>
+        <span class="w l" style="left:42%;top:71%;--dx:4px;--dy:-5px;--t:7.0s">Kaukia važiuojant</span>
+        <span class="w l" style="left:24%;top:24%;--dx:-6px;--dy:4px;--t:8.4s">Traška jungiant</span>
+        <span class="w l" style="left:50%;top:92%;--dx:5px;--dy:-3px;--t:9.8s">Neaiškus garsas</span>
+        <span class="w l g" style="left:47%;top:84%;--dx:-3px;--dy:6px;--t:11.2s">Nejunga pavara</span>
+        <span class="w m" style="left:30%;top:9%;--dx:7px;--dy:-4px;--t:12.6s">Vibruoja svirtis</span>
+        <span class="w m g" style="left:35%;top:1%;--dx:4px;--dy:-5px;--t:7.0s">Sunkiai jungiasi</span>
+        <span class="w s" style="left:13%;top:18%;--dx:-6px;--dy:4px;--t:8.4s">Dūzgia ant tuščios</span>
+        <span class="w m" style="left:53%;top:31%;--dx:5px;--dy:-3px;--t:9.8s">Kietas pedalas</span>
+        <span class="w s" style="left:64%;top:17%;--dx:-3px;--dy:6px;--t:11.2s">Kvepia degėsiais</span>
+        <span class="w m" style="left:8%;top:93%;--dx:7px;--dy:-4px;--t:12.6s">Iššoka pavara</span>
+        <span class="w s" style="left:15%;top:34%;--dx:4px;--dy:-5px;--t:7.0s">Ūžia greitėjant</span>
+        <span class="w s" style="left:8%;top:81%;--dx:-6px;--dy:4px;--t:8.4s">Trūksta pavaros</span>
+        <span class="w s" style="left:3%;top:4%;--dx:5px;--dy:-3px;--t:9.8s">Klibėja svirtis</span>
+        <span class="w m" style="left:69%;top:10%;--dx:-3px;--dy:6px;--t:11.2s">Teka tepalas</span>
+        <span class="w s" style="left:8%;top:72%;--dx:7px;--dy:-4px;--t:12.6s">Slysta sankaba</span>
+        <span class="w s" style="left:50%;top:78%;--dx:4px;--dy:-5px;--t:7.0s">Barška stovint</span>
+        <span class="w s" style="left:5%;top:87%;--dx:-6px;--dy:4px;--t:8.4s">Ūžia guolis</span>
       </div>
       <p class="fix-line reveal">Nereikia žinoti, kaip vadinasi gedimas. Atveškite automobilį: išklausysime, surasime priežastį ir sutaisysime. Atliktiems darbams suteikiame garantiją.</p>
       <div class="reveal" style="text-align:center;margin-top:26px"><a class="btn btn-ink" href="tel:+37069931163">Aprašykite gedimą telefonu <span class="arr" aria-hidden="true">→</span></a></div>
