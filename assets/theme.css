@@ -69,7 +69,9 @@ a { color: inherit; }
 .pt { position: absolute; will-change: transform; }
 .bob { animation: bob var(--bob, 7s) ease-in-out infinite alternate; }
 .spin { animation: spin var(--spin, 30s) linear infinite; animation-direction: var(--dir, normal); }
-.field:not(.vis) .spin, .field:not(.vis) .bob { animation-play-state: paused; }
+.rock { animation: rock var(--bob, 7s) ease-in-out infinite alternate; transform-origin: 50% 40%; }
+.field:not(.vis) .spin, .field:not(.vis) .bob, .field:not(.vis) .rock { animation-play-state: paused; }
+@keyframes rock { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes bob { from { transform: translateY(-8px) rotate(-3deg); } to { transform: translateY(8px) rotate(3deg); } }
 
