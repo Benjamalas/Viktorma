@@ -119,22 +119,6 @@
   .art > div { position: absolute; }
   .art .waves { position: absolute; }
   .chip { position: absolute; z-index: 2; font: 600 9.5px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; background: var(--ink); color: var(--steel-2); padding: 5px 7px; border-radius: 4px; }
-  .pgroup { margin-bottom: 34px; }
-  .pgroup h3 { font: 600 11px/1 var(--f-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--dim); margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
-  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .tile { background: var(--steel-2); border: 1px solid var(--line); border-radius: 14px; padding: 16px 14px 14px; display: grid; gap: 12px; align-content: space-between; }
-  .tile > div { height: 92px; display: grid; place-items: center; }
-  .tile > div .part-svg { max-height: 92px; width: auto; max-width: 100%; }
-  .tile .t-sm .part-svg { max-height: 80px; }
-  .tile .t-spin .part-svg { animation: spin 40s linear infinite; }
-  .tile:nth-child(2n) .t-spin .part-svg { animation-direction: reverse; }
-  .tile span { font: 600 14px/1.25 var(--f-sans); }
-  @media (max-width: 639px) { .tile:last-child:nth-child(odd) { grid-column: 1 / -1; } }
-  @media (min-width: 640px) { .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  @media (min-width: 980px) { .tiles { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
-  @media (min-width: 640px) { .services { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 980px) { .services { grid-template-columns: repeat(3, 1fr); } }
-
   .proof { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); }
   .proof div { padding: 18px 10px 0 0; }
   .proof b { display: block; font: 600 clamp(30px, 9vw, 64px)/1 var(--f-sans); font-stretch: 75%; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
@@ -286,47 +270,6 @@
           <span class="ba-lab l">Prieš</span><span class="ba-lab r">Po</span>
           <div class="ba-handle" aria-hidden="true"><b>‹ ›</b></div>
           <input type="range" id="ba-range" min="0" max="100" value="50" aria-label="Palyginti prieš ir po remonto">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="dalys-mapas" style="padding-top:24px">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <p class="eyebrow">Ką taisome</p>
-        <h2 class="display">Kiekviena dalis, nuo korpuso iki šakutės</h2>
-      </div>
-      <div class="pgroup reveal">
-        <h3>Korpusas</h3>
-        <div class="tiles">
-          <div class="tile"><div class="tone-steel" data-part="case"></div><span>Pavarų dėžės korpusas</span></div>
-          <div class="tile"><div class="tone-steel t-spin" data-part="bellhousing"></div><span>Sankabos gaubtas</span></div>
-          <div class="tile"><div class="tone-brass" data-part="gasket"></div><span>Tarpinės</span></div>
-          <div class="tile"><div class="tone-steel t-spin" data-part="seal"></div><span>Riebokšliai</span></div>
-          <div class="tile"><div class="tone-steel t-sm" data-part="plug"></div><span>Išleidimo ir pripildymo kamščiai</span></div>
-        </div>
-      </div>
-      <div class="pgroup reveal">
-        <h3>Sankaba</h3>
-        <div class="tiles">
-          <div class="tile"><div class="tone-green t-spin" data-part="clutch"></div><span>Sankabos diskas</span></div>
-          <div class="tile"><div class="tone-white t-spin" data-part="pressure"></div><span>Sankabos krepšys</span></div>
-          <div class="tile"><div class="tone-steel t-spin" data-part="flywheel"></div><span>Smagratis</span></div>
-          <div class="tile"><div class="tone-steel t-sm" data-part="pedal"></div><span>Sankabos pedalas</span></div>
-          <div class="tile"><div class="tone-steel" data-part="cable"></div><span>Sankabos trosas</span></div>
-          <div class="tile"><div class="tone-steel" data-part="master"></div><span>Pagrindinis cilindras</span></div>
-          <div class="tile"><div class="tone-steel" data-part="slave"></div><span>Darbinis cilindras</span></div>
-        </div>
-      </div>
-      <div class="pgroup reveal">
-        <h3>Vidinės dalys</h3>
-        <div class="tiles">
-          <div class="tile"><div class="tone-green t-spin" data-part="gear:20"></div><span>Krumpliaračiai</span></div>
-          <div class="tile"><div class="tone-steel" data-part="inputshaft"></div><span>Pirminis velenas</span></div>
-          <div class="tile"><div class="tone-steel" data-part="outputshaft"></div><span>Antrinis velenas</span></div>
-          <div class="tile"><div class="tone-white t-spin" data-part="bearing"></div><span>Guoliai</span></div>
-          <div class="tile"><div class="tone-steel t-sm" data-part="fork"></div><span>Perjungimo šakutės</span></div>
         </div>
       </div>
     </div>
